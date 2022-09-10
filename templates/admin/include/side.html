@@ -1,0 +1,159 @@
+
+
+
+
+<aside class="main-sidebar leftside" style="background-color: rgb(6, 19, 36) !important;">
+
+    <section class="sidebar">
+
+
+
+        <div class="text-center" data-toggle="modal" data-target="#viewadmin" ng-click="select_admin(admin)">
+          <div class="profile-photo-small" ng-style="{'background-image':'url('+media+admin.photo +'?token='+token+')'}"></div>  
+                               
+          <h5>Hello, {{admin.full_name || 'Obic' |capitalize}}</h5>
+          <b class="oran" ng-if="admin.administrator.role==0">Owner</b>
+          <b class="oran" ng-if="admin.administrator.role==1">Manager</b>
+          <b class="oran" ng-if="admin.administrator.role==2">Sales</b>
+          <b class="oran" ng-if="admin.administrator.role==3">Accounting</b>
+          <b class="oran" ng-if="admin.administrator.role==4">Support</b>
+          <hr>
+        </div>
+
+      <ul class="sidebar-menu tree" data-widget="tree" style="margin-top:0px !important;padding-top: 0px !important;">
+
+    
+
+              <li class="side_link">
+              <a href="/office/dashboard"><i class="fas fa-th-large orange"></i> 
+                &nbsp;&nbsp;&nbsp;<span>Overview</span>
+              </a>
+              </li>
+
+
+
+
+              <li class="side_link" ng-if="admin.administrator.access.transactions">
+                <a href="/office/transactions"><i class="fa fa-tags orange"></i>
+                  &nbsp;&nbsp;&nbsp;<span>Trades</span>
+                     <span ng-if="(transactions | filter:{status:1}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(transactions | filter:{status:1}).length || 0}}</span>
+                </a>
+                </li>
+
+
+
+
+
+
+                <li class="side_link" ng-if="admin.administrator.access.customers">
+                  <a href="/office/customers"><i class="fa fa-users orange"></i>
+                    &nbsp;&nbsp;&nbsp;<span>Users</span>
+                  </a>
+                </li>
+
+
+
+
+                <li class="side_link" ng-if="admin.administrator.access.pool">
+                  <a href="/office/pool"><i class="fa fa-trophy orange"></i>
+                    &nbsp;&nbsp;&nbsp;<span>Affiliates</span>
+                  </a>
+                  </li>
+
+
+
+
+                <li class="side_link"  ng-if="admin.administrator.access.pool">
+                  <a href="/office/agents"><i class="fa fa-flag orange"></i>
+                    &nbsp;&nbsp;&nbsp;<span>Agents</span>
+                  </a>
+                  </li>
+  
+
+
+              <li class="side_link" ng-if="admin.administrator.access.cryptocurrency">
+                <a href="/office/crypto"><i class="fa fa-wallet orange"></i>
+                  &nbsp;&nbsp;&nbsp;<span>Wallets</span>
+                </a>
+                </li>
+
+
+                <li class="side_link" ng-if="admin.administrator.access.assets">
+                  <a href="/office/assets"><i class="fab fa-cc-discover orange"></i>
+                    &nbsp;&nbsp;&nbsp;<span>Gift Cards</span>
+                  </a>
+                  </li>
+                  
+
+                <li class="side_link" ng-if="admin.administrator.access.peers">
+                  <a href="/office/peers"><i class="fa fa-money-bill orange"></i>
+                    &nbsp;&nbsp;&nbsp;<span>Payments</span>
+                    <span ng-if="(peers | filter:{status:1}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(peers | filter:{status:1}).length || 0}}</span>
+                  </a>
+                  </li>
+
+
+
+                  <li class="side_link" ng-if="admin.administrator.access.pool">
+                    <a href="/office/requests"><i class="fa fa-envelope-open-text orange"></i>
+                      &nbsp;&nbsp;&nbsp;<span>Requests</span>
+                      <span ng-if="(customers | filter:{on_approval:true}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(customers | filter:{on_approval:true}).length || 0}}</span>
+                    </a>
+                    </li>
+
+
+
+
+
+        
+        
+        
+
+                  <li class="side_link" ng-if="admin.administrator.access.roles">
+                    <a href="/office/team"><i class="fa fa-hands-helping orange"></i>
+                      &nbsp;&nbsp;&nbsp;<span>Roles</span>
+                    </a>
+                    </li>
+                     
+
+                  <li class="side_link" ng-if="admin.administrator.access.roles">
+                    <a href="/office/backup"><i class="fa fa-database orange"></i>
+                      &nbsp;&nbsp;&nbsp;<span>Backup</span>
+                    </a>
+                    </li>
+
+                    <br/>
+                    <br/>
+                     
+                      
+<!--                       
+                      <li class="side_link">
+                          <a href="/office/settings"><i class="fas fa-cogs orange"></i>
+                            &nbsp;&nbsp;&nbsp;<span>Settings</span>
+                          </a>
+                          </li>
+ -->
+
+
+                      
+                          <li class="side_link">
+                            <a>
+                          <div class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logout" style="margin: auto !important;display:inline !important;direction: ltr !important;float: auto !important;">
+                              <span>Logout</span>
+                          </div>
+                        </a>
+                          </li>
+  
+  
+      
+      
+
+      </ul>
+
+
+
+      
+
+    </section>
+  </aside>
+

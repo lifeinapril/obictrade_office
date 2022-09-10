@@ -1,0 +1,88 @@
+
+ 
+<div ng-include src="'templates/admin/include/banner.html'"></div>
+
+<div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+
+
+
+<div class="col col-md-10">
+            <div class="box">
+  
+        
+
+
+              <section class="content-header">
+                <br>
+                <h2 class="black">
+                Backups
+                </h2>
+                </section>
+
+
+  
+    <div style="padding:10px !important;overflow:scroll !important;">
+
+
+
+
+    
+      <div class="row">
+        <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+          <input type="text" ng-model="srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search for backup...">
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+            <button data-toggle="modal" data-target="#backup" class="btn btn-green pull-right">New Backup +</button>
+            <button data-toggle="modal" data-target="#restore" class="btn btn-orange pull-right">Restore</button>
+        </div>    
+        <br>
+      </div>
+      <br>
+      <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+        <tbody style="border:none !important;">
+        <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+        <th>Name</th>
+        <th>Path</th>
+        <th>Backup Date</th>
+        <th></th>
+      </tr>
+
+      <tr  ng-repeat="b in backups | orderBy:'-date_created' | filter:srch" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;">
+        <td>{{b.name}}</td>
+        <td>{{media_secure}}{{b.path}}</td>
+         <td>{{b.date_created | date:"MMMM d, y,  hh:mm a"}}</td>
+        <td>
+            <button ng-click="download_backup(b.path)" class="btn btn-sm btn-blue pull-right">Download</button>
+        </td>
+      </tr>
+    </tbody>
+  
+  </table>
+    
+
+<div ng-show="!backups || backups.length < 1" class="text-center padding"><br><br><br>
+<b>No backup yet. Please backup data and download</b>
+</div>
+
+
+
+    
+</div>
+
+
+
+
+
+
+  </div>
+  </div>
+
+  
+
+
+  <div ng-include src="'templates/admin/popups/restore.html'"></div>
+
+  <div ng-include src="'templates/admin/popups/backup.html'"></div>
+
+
+  <div ng-include src="'templates/admin/popups/logout.html'"></div>

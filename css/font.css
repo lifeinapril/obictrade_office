@@ -1,0 +1,22 @@
+
+
+
+@font-face {
+    font-family: "RadioCanada";
+    font-weight: 400;
+    src: url("../fonts/RadioCanada/RadioCanada-Light.ttf");
+  }
+  
+  @font-face {
+    font-family: "Work Sans";
+    font-weight: 400;
+    src: url("../fonts/Work_Sans/static/WorkSans-Black.ttf");
+  }
+  
+  *{
+    font-family:"RadioCanada" !important;
+   }
+   
+  h1, h2, h3, h4, h5, h6 {
+    font-family:"RadioCanada" !important;
+  }

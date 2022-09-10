@@ -1,0 +1,113 @@
+<div ng-include src="'templates/admin/include/banner.html'"></div>
+
+<div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+
+
+
+<div class="col col-md-7">
+
+
+
+
+
+  
+            <div class="content grade">
+
+
+
+
+
+
+
+
+
+              <section class="content-header">
+                <br>
+                <h4 class="dark">
+                  Roles
+                </h4>
+                </section>
+
+
+  
+    <div class="box padding" style="padding:10px !important;">
+
+
+
+                <div class="row">
+                        <div class="input-group-sm col col-md-7">
+                        <input type="text" ng-model="srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search for administrators...">
+                        </div>   
+                        <div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+                        <button ng-if="admin.administrator.access.create_admin" data-toggle="modal" data-target="#createadmin" class="btn btn-sm btn-blue pull-right">Add role</button>
+                        </div>     
+                </div>
+   
+                
+                <br>
+
+
+                    <table class="table table-hover no-border" style="border:none !important;">
+                      <tbody style="border:none !important;">
+                        <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                        <th>Name</th>
+                        <!-- <th>Email</th> -->
+                        <th>Role</th>
+                      </tr>
+
+                      <tr ng-repeat="admina in admins | filter:srch | orderBy:'-_id'"  data-toggle="modal" data-target="#viewadmin" ng-click="select_admin(admina)" style="cursor:pointer;background-color:rgb(211, 209, 209) !important;color:rgb(218, 214, 214) !important;">
+                        <td>
+                          {{admina.account.full_name}}&nbsp;
+                          <span ng-if="admina.peer=='yes'" class="fa fa-link" style="color: rgb(30, 104, 243);"></span>
+                        </td>
+                        <!-- <td>{{admina.email}}</td> -->
+                        <td>
+                            <b class="dark-orange" ng-if="admina.role==0">Owner</b>
+                            <b class="dark-orange" ng-if="admina.role==1">Manager</b>
+                            <b class="dark-orange" ng-if="admina.role==2">Sales</b>
+                            <b class="dark-orange" ng-if="admina.role==3">Accounting</b>
+                            <b class="dark-orange" ng-if="admina.role==4">Support</b>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+    
+
+                <div ng-show="!admins || admins.length < 1" class="text-center padding">
+                  <br><br><br>
+                  <b>No admins registered on obictrade</b>
+                </div>
+
+</div>
+          </div>
+  </div>
+
+
+
+  <div  class="col col-md-3 col-sm-12 rightside">
+
+<div class="row" style="margin-top: 20px;">
+
+  <div ng-include src="'templates/admin/components/recent_activities.html'"></div>
+    
+  </div>
+  
+  </div>
+
+
+
+
+
+  
+  
+  <div ng-include src="'templates/admin/popups/create_admin.html'"></div>
+
+  
+  
+  <div ng-include src="'templates/admin/popups/view_admin.html'"></div>
+
+
+
+
+  <div ng-include src="'templates/admin/popups/logout.html'"></div>
+ 

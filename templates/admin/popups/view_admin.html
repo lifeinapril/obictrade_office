@@ -1,0 +1,61 @@
+
+      
+  
+  <div class="modal modal-default fade in" id="viewadmin">
+    <div class="modal-dialog  modal-lg">
+      <form class="modal-content" ng-submit="update_admin(selected_admin)">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+
+              <div class="list-group">
+                <div class="profile-photo" ng-style="{'background-image':'url('+media+selected_admin.account.photo +'?token='+token+')'}"></div>  
+                <br>
+                <div class="list-group-item">
+                    <b class="blue">{{selected_admin.account.full_name || selected_admin.account.first_name +' '+ selected_admin.account.last_name | capitalize}}</b>
+                    <h5 ng-if="selected_admin.user_name" style="color: dodgerblue;">@{{selected_admin.account.user_name}}</h5>
+                </div>
+
+                <div class="list-group-item"><b>Email</b><Br> <v class="black">{{selected_admin.account.email || '...'}}</v></div>
+                <div class="list-group-item"><b>Role</b><Br>
+                    <b class="dark-orange" ng-if="selected_admin.role==0">Owner</b>
+                    <b class="dark-orange" ng-if="selected_admin.role==1">Manager</b>
+                    <b class="dark-orange" ng-if="selected_admin.role==2">Sales</b>
+                    <b class="dark-orange" ng-if="selected_admin.role==3">Accounting</b>
+                    <b class="dark-orange" ng-if="selected_admin.role==4">Support</b>
+                </div>
+          
+
+                  <div class="text-center padding" ng-if="admin.administrator.access.create_admin">
+                    <a ng-show="selected_admin._id!=admin.administrator._id" ng-click="remove_admin(selected_admin)" class="btn btn-outline" style="background: none;color:red;text-decoration:underline;">Remove Administrator</a>
+                </div>
+                
+                </div>
+              </div>
+
+
+              <div class="col-md-8 col-sm-12">
+
+                <div ng-include src="'templates/admin/tabs/admin_tab.html'"></div>
+
+              </div>
+
+            
+</div>
+
+
+        </div>
+        <div class="modal-footer text-center center">
+            <button  ng-if="admin.administrator.role < 2 && admin.administrator.access.create_admin" type="submit" class="btn btn-block btn-lg btn-blue btn-long btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  

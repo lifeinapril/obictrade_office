@@ -1,0 +1,175 @@
+<div id="fh5co-page">
+        <div>
+      
+          <div ng-include src="'assets/admin/banner.html'"></div>
+       
+          <div class="col col-md-2" ng-include src="'assets/admin/side.html'"></div>
+          
+      <div class="col col-md-10">
+      
+          <section class="content-header">
+                  <h1>
+                    Profile
+                    <small>Control panel</small>
+                  </h1>
+                  <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active"> Profile</li>
+                  </ol>
+                </section>
+      
+      
+                <section class="content grade">
+                    
+                          <div class="row">
+    
+                            <div class="col-md-3">
+                                
+                              <div class="box box-secondary" style="box-shadow:0px 2px 20px 0px rgba(0, 0, 0, 0.589) !important;">
+                                <div class="box-body box-profile">
+                                  <img class="profile-user-img img-responsive img-circle" src="{{media}}{{admin.photo +'?token='+token}}" alt="User profile picture">
+                    
+                                  <h3 style="color:rgb(240, 238, 235) !important;" class="text-center">{{admin.first_name}} {{admin.last_name}}</h3><br>
+                                  <b class="text-center">{{admin.email}}</b><br>
+                                  <b class="text-center">{{admin.phone}}</b>  <br>    
+                                      <b>Registered On</b> <a class="pull-right" style="color:rgb(240, 238, 235) !important;" >{{admin.date_created | date}}</a>
+                                  <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+                                </div>
+                              </div>
+                            </div>
+                            
+    
+    
+                            <div class="col-md-9">
+                              <div class="nav-tabs-custom bg-black">
+                                <ul class="nav nav-tabs row"> 
+                                   <li class=""><a data-target="#password_change" data-toggle="tab">Security</a></li>
+                                   <li class="active"><a data-target="#settings" data-toggle="tab">Edit / Settings</a></li>
+                                   <li class=""><a data-target="#timeline" data-toggle="tab">Timeline</a></li>
+                                </ul>
+                                <div class="tab-content" style="background-color:rgb(19, 17, 17) !important">
+                                  
+                                  <div class="tab-pane" style="background-color:rgba(199, 41, 41, 0.014) !important" id="timeline">
+                                    <h2>Recent Activities</h2>
+                                    <hr>
+                                      <div class="timeline">
+
+                                          <div class="box" ng-repeat="log in logs | orderBy:'-date' | filter:{m_id:admin.m_id} | limitTo:10">
+                                            <div class="text-left" style="padding: 10px;">
+                                              <v style="color: #323232;"><b>{{log.admin.first_name}} {{log.admin.last_name}}</b> 
+                                                <span class="badge badge-secondary" style="background-color:orangered !important;" ng-if="log.role=='admin'">{{log.role}}</span> 
+                                                <span class="badge badge-secondary" style="background-color:rgb(123, 255, 0) !important;" ng-if="log.role=='rider'">{{log.role}}</span> 
+                                                <span class="badge badge-secondary" style="background-color:rgb(98, 0, 255) !important;" ng-if="log.role=='manager'">{{log.role}}</span> 
+                                                {{log.message}}</v><br>
+                                              <i style="font-size:13px;color: #323232;">{{log.date | date: ' EEEE, MMMM d, y.     h:mm a'}}</i>
+                                            </div>
+                                          </div>
+                            
+                            </div>
+                                  </div>
+
+
+
+
+                                  <div class="tab-pane" style="background-color:rgba(199, 41, 41, 0.034) !important" id="password_change">
+                                      <form ng-submit="update_password(admin)" class="form-horizontal">
+
+                                          <div class="form-group">
+                                              <label for="inputName" class="col-sm-2 control-label">Password</label>
+                          
+                                              <div class="col-sm-10">
+                                                <input type="password" class="form-control bg-black" id="inputPassword" ng-model="admin.new_password" placeholder="New Password"/>
+                                              </div>
+                                            </div>
+                                      
+                                            <div class="form-group">
+                                                <label for="inputName" class="col-sm-2 control-label">Retype-Password</label>
+                            
+                                                <div class="col-sm-10">
+                                                  <input type="password" class="form-control bg-black" id="retypePassword" ng-model="admin.retype_password" placeholder="Retype Password">
+                                                </div>
+                                              </div>
+
+
+                                      <div class="form-group">
+                                          <div class="col-sm-offset-2 col-sm-10">
+                                            <button ng-disabled="admin.new_password!=admin.retype_password && admin.new_password==''" type="submit" class="btn btn-warning">Change</button>
+                                          </div>
+                                        </div>
+                                            
+                                        </form>    
+                                  </div>
+
+
+
+                    
+                                  <div class="tab-pane active" id="settings" style="margin-top:-10px; padding:10px;background-color:rgba(199, 41, 41, 0) !important">
+                                   
+                                    <form ng-submit="update_admin(admin)" class="form-horizontal">
+
+                                      <div class="form-group">
+                                        <label for="inputName" class="col-sm-2 control-label">First Name</label>
+                    
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control bg-black" id="firstName" ng-model="admin.first_name" placeholder="First Name">
+                                        </div>
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="inputName" class="col-sm-2 control-label">Last Name</label>
+                    
+                                        <div class="col-sm-10">
+                                          <input type="text" class="form-control bg-black" id="lastName" ng-model="admin.last_name" placeholder="Last Name">
+                                        </div>
+                                      </div>
+
+                                      <div class="form-group">
+                                          <label for="inputName" class="col-sm-2 control-label">Email</label>
+                      
+                                          <div class="col-sm-10">
+                                            <input type="text" class="form-control bg-black" ng-model="admin.email" placeholder="Email">
+                                          </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-2 control-label">Phone</label>
+                        
+                                            <div class="col-sm-10">
+                                              <input type="text" class="form-control bg-black" id="inputName" ng-model="admin.phone" placeholder="Email">
+                                            </div>
+                                          </div>
+                                     
+                                      <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                          <button type="submit" class="btn btn-warning">Save</button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+    
+                              </div>
+                            </div>
+                            
+                          </div>
+                          
+                    
+                        </section>
+    
+    
+              </div>
+            </div>
+         
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

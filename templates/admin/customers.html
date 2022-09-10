@@ -1,0 +1,91 @@
+
+
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+    
+    
+<div class="col col-md-10">
+  <div class="box padding">
+
+
+                  <section class="content-header">
+                    <br>
+                    <h2 class="black">
+                    Users       
+                    </h2>
+                    <small class="black dark" style="color: black !important;">({{customers.length || 0}} users)</small>
+               
+                    </section>
+
+      
+     
+
+
+        
+            <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+              <input type="text" ng-model="srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search for customers...">
+            </div>
+            <br>
+            <br>
+              <table class="table table-hover">
+                <tbody>
+                    <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                      <th>Name</th>
+                      <!-- <th>Naira Balance</th>
+                      <th>BTC Balance</th> -->
+                      <th>Date Joined</th>
+                      <th>Last Login</th>
+                      <th></th>
+                    </tr>
+
+                    <tr  ng-repeat="user in customers | orderBy:'-login_date' | filter:srch" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;width:100% !important;"  data-toggle="modal" data-target="#viewcustomer" ng-click="select_customer(user)">
+                      <td>{{user.full_name || (user.first_name+' '+user.last_name) | capitalize}}</td>
+                      <!-- <td class="green">{{user.naira_wallet.balance || 0 | currency}}</td>
+                      <td class="oran">{{user.bitcoin_wallet.balance || 0 | number:8}} BTC</td> -->
+                      <td>{{user.date_created | date}}</td>
+                      <td>{{user.login_date | date}}</td>
+                      <td>
+                        <b ng-if="user.suspended" style="color: orange !important;">suspended</b>
+                        <b ng-if="!user.suspended" style="color: rgb(25, 224, 7) !important;">active</b>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+        
+
+                <div ng-show="!customers || customers.length < 1" class="text-center padding"><br><br><br>
+                    <b>No customers registered on obictrade</b>
+                </div>
+                  
+
+
+
+
+
+
+
+      </div>
+      </div>
+
+
+
+
+      
+
+
+      <div ng-include src="'templates/admin/popups/traders.html'"></div>
+
+      <div ng-include src="'templates/admin/popups/open_crypto.html'"></div>
+  
+<div ng-include src="'templates/admin/popups/view_customer.html'"></div>
+
+  
+<div ng-include src="'templates/admin/popups/view_peer.html'"></div>
+  
+<div ng-include src="'templates/admin/popups/view_transaction.html'"></div>
+
+
+<div ng-include src="'templates/admin/popups/logout.html'"></div>
+ 

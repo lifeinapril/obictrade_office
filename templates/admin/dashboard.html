@@ -1,0 +1,327 @@
+
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+<div class="col col-md-7 col-lg-7">
+          <div class="box">
+
+
+                <section class="content-header">
+                  <br>
+                <h2 class="black">
+                Overview
+                </h2>
+                <hr>
+                </section>
+
+
+
+
+                <div class="row">
+
+
+             
+                  <div class="pull-right" style="float: right !important; margin-right: 20px !important;">
+                    <select title="link" ng-model="year" ng-change="change_year(year)">
+                      <!-- <option value="2023">2023 vs 2022</option> -->
+                      <option value="2022">2022 vs 2021</option>
+                      <option value="2021">2021 vs 2020</option>
+                      <option value="2020">2020 vs 2019</option>
+                      <option value="2019">2019 vs 2018</option>
+                    </select>
+                  </div>
+
+                  <h5 class="padding black">Trading activity</h5>
+
+  
+    
+                  <div  class="col-lg-12 col-xs-12 col-sm-12">
+                    <canvas style="width:100% !important;margin-bottom: 30px !important;margin-left: -20px !important;" class="chart chart-bar" chart-data="chart.data"
+                    chart-labels="chart.labels" chart-series="chart.series" chart-colors="chart.colors">
+                    </canvas>
+                  </div>
+
+                  </div>
+      
+  
+              <div class="row">
+
+
+
+                <h5 class="padding black">Customer activity</h5>
+
+                                          <div class="col-lg-8 col-xs-12 col-sm-12">
+                                              <div class="small-box bg-white">
+                                                <div class="inner"> 
+                                                  <p>Total Users</p>
+                                                  <h3>{{customers.length || '-'}} <small>Users</small></h3>
+                                                </div>
+                                                <div class="icon">
+                                                  <i class="fa  fa-users orange"></i>
+                                                </div>
+                                                <a ng-if="admin.administrator.access.customers" href="/office/customers" class="small-box-footer">See all customers <i class="fa fa-arrow-circle-right"></i></a>
+                                              </div>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-xs-12 col-sm-12">
+                                              <div class="small-box bg-white">
+                                                <div class="inner">
+                                                  <h3>{{(transactions | filter:{status:1}).length || '-'}}<small> / {{transactions.length || '-'}}</small></h3>
+                                    
+                                                  <p>Pending Trades</p>
+                                                </div>
+                                                <a ng-if="admin.administrator.access.transactions" href="/office/transactions" class="small-box-footer">Go to trades <i class="fa fa-arrow-circle-right"></i></a>
+                                              </div>
+                                            </div>
+                                          
+                  
+                  
+                                          
+                  
+                  
+                  
+                  
+                  
+           </div>
+
+
+
+
+<div class="row">
+
+  
+  <h5 class="padding black">Supply and demand</h5>
+
+  <div class="col-lg-8 col-xs-12 col-sm-12">
+   
+    <div class="small-box bg-black">
+      <div class="inner"> 
+        <p>Overall Coins</p>
+        <h3 style="color: coral !important;">${{((total_coin_wallet(bitcoin) * bitcoin.selling.usd) + (total_coin_wallet(ethereum) * ethereum.selling.usd) + (total_coin_wallet(usdt) * usdt.selling.usd)) || 0 | limitTo:6}}</h3>
+        <br>
+      </div>
+      <div class="icon">
+        <i class="fa  fa-coins orange"></i>
+      </div>
+     </div>
+  </div>
+
+
+  
+  <div class="col-lg-4 col-xs-12 col-sm-12">
+    <div class="small-box bg-white">
+      <div class="inner">
+        <p>Pending Transaction</p>
+        <h3>{{(peers | filter:{status:1}).length || '-'}}<small> Waiting</small></h3>
+      </div>
+      <a ng-if="admin.administrator.access.peers" href="/office/peers" class="small-box-footer">Go to payments <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+    
+  </div>
+
+
+</div>
+
+
+
+  <div class="row" style="margin-top: 20px;">
+
+    <div ng-include src="'templates/admin/components/recent_activities.html'"></div>
+    
+  </div>
+    
+  
+  
+
+
+
+<!-- 
+
+
+
+
+
+
+
+                <div class="box padding" style="padding:10px !important;overflow:scroll !important;">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-3 pull-right" ng-init="filter_status(2)">
+                      <select ng-model="dropfilter" ng-change="filter_status(dropfilter)">
+                        <option value="" selected>All</option>
+                        <option value="2" selected>Successful</option>
+                        <option value="0" selected>Declined</option>
+                      </select>
+                    </div>
+                </div>
+
+                  <div class="">
+                          <h4 style="padding: 4px;color:#000;">Most Recent Transactions</h4>
+                  </div>
+                      <table class="table table-hover">
+                              <tbody>
+                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                      <th>Transaction ID</th>
+                                      <th>Transaction Type</th>
+                                      <th>Amount</th>
+                                      <th>Date</th>
+                                      <th>Status</th>
+                              </tr>
+                    
+                              <tr ng-repeat="p in transactions | filter:srch | filter:{status:dropfilter} | orderBy:'-date_created' | limitTo:25" style="cursor:pointer;" data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+                                <td>{{p.transaction_id}}</td>
+                                <td>{{p.name}} <b class="orange">{{p.type}}</b></td>
+                                <td>
+                                  <b ng-if="p.type=='cryptocurrency'">{{p.symbol || '$'}} {{p.amount || 0}}</b>
+                                  <div ng-if="p.type=='gift card'">
+                                    <b ng-if="card.quantity > 0" ng-repeat="card in p.cards">{{p.symbol || '$'}} {{card.amount || 0}} ,</b>
+                                  </div>
+                                </td>
+                                <td>{{p.date_created | date}}</td>
+                                <td>
+                                  <b ng-if="p.status==1" class="pull-right">Pending...</b>
+                                    <b ng-if="p.status==2" class="green pull-right">Successful</b>
+                                    <b ng-if="p.status==0" class="red pull-right">Declined</b>
+                                </td>
+                              </tr>
+                    
+                            </tbody>
+                          </table>  
+
+
+                          <div class="text-center padding" ng-if="!transactions || transactions.length < 1">
+                           <br><br><br> <b>You Haven't Had Any Transaction Yet</b>
+                          </div>
+                  
+              </div> -->
+
+
+
+
+        </div>
+      </div>
+
+
+
+
+
+        <aside class="col col-md-3 rightside">
+
+          <br><br>
+
+
+
+
+      
+        <div class="box padding" style="padding:10px !important;overflow:scroll !important;">
+
+
+          <h3 class="orange">
+              <i class="fa  fa-users orange"></i> Users Today
+            </h3>
+
+          <h6 class="black">{{
+            (customers | filter:TodayCustomers).length || 0
+          }} customers logged in today</h6>
+          <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+            <tbody style="border:none !important;">
+            <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+            <th>Name</th>
+            <th>Last Login</th>
+          </tr>
+
+          <tr  ng-repeat="user in customers | filter:TodayCustomers | orderBy:'-login_date' | filter:srch" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewcustomer" ng-click="select_customer(user)">
+            <td>{{user.full_name || (user.first_name+' '+user.last_name) | capitalize}}</td>
+            <td>{{user.login_date | date: "hh:mm a"}}</td>
+          </tr>
+        </tbody>
+      
+      </table>
+        
+
+<div ng-show="!customers || (customers | filter:TodayCustomers).length < 1" class="text-center padding"><br><br><br>
+    <b>No customers today</b>
+</div>
+  
+
+
+        
+    </div>
+
+
+
+
+
+    <br>
+
+
+    
+      
+    <div class="box padding" style="padding:10px !important;overflow:scroll !important;">
+
+
+      <h3 class="orange">
+        <i class="fa fa-tags orange"></i> Today's Trades
+        </h3>
+
+      <h6 class="black">{{
+        (transactions | filter:TodaySales).length || 0
+      }} sales today</h6>
+      <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+        <tbody style="border:none !important;">
+        <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+
+      <tr  ng-repeat="p in transactions | filter:TodaySales | orderBy:'-date_created'" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+          <td>{{p.name}}</td>
+           <td>
+             <b ng-if="p.status==1" class="pull-right">Pending...</b>
+             <b ng-if="p.status==2" class="green pull-right">Successful</b>
+             <b ng-if="p.status==0" class="red pull-right">Declined</b>
+         </td>
+        </tr>
+    </tbody>
+  
+  </table>
+    
+
+<div ng-show="!transactions || (transactions | filter:TodaySales).length < 1" class="text-center padding"><br><br><br>
+<b>No sales today</b>
+</div>
+
+
+
+    
+</div>
+
+
+
+
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+  
+<div ng-include src="'templates/admin/popups/view_transaction.html'"></div>
+
+
+
+
+<div ng-include src="'templates/admin/popups/logout.html'"></div>
+ 
+
+  
+<div ng-include src="'templates/admin/popups/view_customer.html'"></div>
+
+<div ng-include src="'templates/admin/popups/view_admin.html'"></div>

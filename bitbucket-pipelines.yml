@@ -1,0 +1,20 @@
+image: atlassian/default-image:3
+pipelines:
+  branches:
+    master:
+     - step:
+          name: Deploy to Production
+          deployment: Production
+          script:   
+            - AZURE_IMAGE=$AZURE_IMAGE
+            - VERSION="latest"
+            - docker build -t ${AZURE_IMAGE}:${VERSION} .
+            - docker login  ${AZURE_SERVER} --username ${AZURE_USERNAME} --password ${AZURE_PASSWORD}
+            - docker push "${AZURE_IMAGE}:${VERSION}"
+          services:
+            - docker
+          size: 2x
+definitions:
+  services:
+    docker:
+      memory: 4096

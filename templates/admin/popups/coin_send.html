@@ -1,0 +1,95 @@
+
+      
+  
+  <div class="modal fade bd-example-modal-sm" id="wallet_send" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-md">
+        <form class="modal-content" enctype="multipart/form-data" ng-submit="send_coin(coin_value,address)">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+            <h4 class="modal-title black">Send {{coin.coin}}</h4>
+        </div>
+        <div class="modal-body" style="padding:18px !important;">
+             
+
+            <div ng-if="error" class="padding text-center">
+                <h6 class="red">{{error}}</h6>
+             </div>
+      
+<div class="list-group-item">
+    <b>Sending to</b><br>
+    <div class="form-group has-feedback">
+      <input ng-model="address" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="{{coin.address || 'd7dt6dcd67vgd67gsdvgx7d7gv7cvxxv7g'}}" required>
+    </div>
+   </div>
+     
+
+
+
+         
+        <div class="list-group-item" ng-if="show_coin">     
+          <a class="pull-right link" style="cursor: pointer !important;" ng-click="show_usd_input()">Enter amount in US Dollars</a>
+              <br>
+              <b>Amount in <small>{{coin.coin}}</small></b>
+              <div class="form-group has-feedback">
+                <input ng-model="coin_value"  ng-keyup="selling_converter('',coin_value)" maxlength="10" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="0.000000" required>
+              </div>
+              <a class="pull-right btn btn-sm btn-small btn-default" ng-click="max_coin()">Max amount</a>
+            
+              <h6 class="black">USD value <b class="green">${{usd_value || 0 | number:2}}</b></h6>
+           </div>
+            
+          <div class="list-group-item" ng-if="!show_coin && !show_usd">
+          <a class="pull-right link" style="cursor: pointer !important;" ng-click="show_coin_input()">Enter amount in {{coin.coin}}</a>
+             <br>
+              <b>Amount in Naira <small>(₦)</small>*</b>
+              <div class="form-group has-feedback">
+                <input ng-model="naira_value" ng-keyup="selling_converter('ngn',naira_value)" maxlength="10" type="number" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="{{naira_value || 0}}" required>
+              </div> 
+              <a class="pull-right btn btn-sm btn-small btn-default" ng-click="max_coin()">Max amount</a>
+              <h6 class="black">USD value <b class="green">${{usd_value || 0 | number:2}}</b></h6>
+            </div>
+              
+          
+
+            <div class="list-group-item" ng-if="show_usd">
+              <a class="pull-right link" style="cursor: pointer !important;" ng-click="show_naira_input()">Enter amount in naira</a>
+              <br>
+              <b>Amount in USD <small>($)</small>*</b>
+              <div class="form-group has-feedback">
+                <input ng-model="usd_value" ng-keyup="selling_converter('usd',usd_value)" maxlength="10" type="number" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="0" required>
+              </div> 
+              <a class="pull-right btn btn-sm btn-small btn-default" ng-click="max_coin()">Max amount</a>
+              <h5 class="black">Naira value <b class="green">{{naira_value || 0 | currency}}</b></h5>
+            </div>
+              
+          
+<br>
+<div class="list-group">
+  <li class="list-group-item">
+  <v>Transfer Fee</v> <b class="orange pull-right">{{coin.fee || 0  | number:8}} {{coin.coin}}</b>
+  </li>
+</div> 
+
+<div class="list-group">
+  <li class="list-group-item">
+  <v>Total</v> <b class="orange pull-right">{{coin_tots() || 0 | number:8}} {{coin.coin}}</b>
+  </li>
+</div>
+       
+            
+        
+    <div class="modal-footer text-center center">
+        <button ng-show="!show_loader" type="submit" ng-disabled="(coin_value < 0) || !address || !coin_value" style="background:rgb(15, 15, 15);color:#fff;" class="btn btn-lg btn-dark">&nbsp;&nbsp;Send&nbsp;&nbsp;</button>
+        <b ng-show="show_loader">Please Wait...</b>
+      </div>
+
+    </div>
+    
+    </form>
+  
+    </div>
+  </div>
+  
+  

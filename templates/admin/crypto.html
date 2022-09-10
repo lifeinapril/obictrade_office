@@ -1,0 +1,185 @@
+ 
+        
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+    
+    <div class="col col-md-7 col-xs-12 col-sm-12">
+      <div class="box" style="float: left !important;">
+      <section class="content-header">
+        <br>
+        <h2 class="black">Wallets</h2>
+        <br/>
+      </section>
+
+      <br>
+    <table class="table">
+      <tbody style="border:none !important;">
+        <tr>
+          <th>Coin</th>
+          <th>Total balances</th>
+          <th>Rate</th>
+          <th>Value</th>
+          <th></th>
+        </tr>
+  
+        <tr  ng-repeat="coin in coins | filter:srch" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;">
+          <td>
+            <img title="link" ng-if="coin.icon" src="{{media + coin.icon +'?token='+token}}" height="30" />
+          </td>
+          <td>{{total_coin_wallet(coin) | limitTo:8}} {{coin.coin}}</td>
+          <td><b>${{coin.buying.usd || 0 | number:2}}</b> / {{coin.coin}}</td>
+          <td class="green">${{(total_coin_wallet(coin) * coin.selling.usd) || 0 | number:2}}</td>
+          <td>   
+            <a data-toggle="modal" data-target="#traders"  ng-click="open_wallet(coin)" style="text-decoration: underline !important; color: rgb(185, 143, 27) !important;cursor: pointer;">view wallets</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+
+<div ng-show="!coins || coins.length < 1" class="text-center padding"><br><br><br>
+<b>No coins in the system</b>
+</div>
+
+
+
+
+
+        
+      </div>
+        
+    </div>
+
+
+
+<div class="col col-md-3 rightside" style="background-color: black !important;">
+
+  <br><br>
+
+  <p style="color: #fff !important;">Trading volume</p>
+  <canvas id="pie" class="chart chart-pie"
+  chart-data="chart2.data" chart-labels="chart2.labels" chart-options="chart2.options" chart-colors="chart2.colors">
+</canvas> 
+<br/><br/>
+
+<div class="col-lg-12 col-xs-12 col-sm-12">
+  <div class="small-box bg-black">
+    <div class="inner"> 
+      <p>Total Assets</p>
+      <h4 class="white">${{((total_coin_wallet(bitcoin) * bitcoin.selling.usd) + (total_coin_wallet(ethereum) * ethereum.selling.usd) + (total_coin_wallet(usdt) * usdt.selling.usd)) || 0 | limitTo:6}}</h4>
+    </div>
+    <div class="icon">
+      <i class="fa fa-coins white"></i>
+    </div>
+   </div>
+</div>
+<br>
+<br>
+<h4 style="color:#fff !important;">Obic rates</h4>
+<div class="box padding" ng-repeat="coin in coins" style="width: 100% !important; float: left !important;">
+      <div class="text-right" style="float: right !important;">    
+          <h4>
+          <b>{{(coin.buying.usd*coin.buy_rates) || 0 | currency:'₦':0}}</b> / {{coin.coin}}
+          </h4>
+          <div class="row">
+            <div ng-if="coin.allow_buy" class="badge badge-pill badge-warning" style="background-color: coral;">NGN {{coin.buy_rates || 0 | number:2}} /$</div>
+            <div ng-if="coin.allow_sell" class="badge badge-pill badge-warning" style="background-color: darkcyan;">NGN {{coin.sell_rates || 0 | number:2}} /$</div>  
+          </div>
+          <a data-toggle="modal" data-target="#openwallet"  ng-click="open_wallet(coin)" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">Settings</a>  
+         </div>  
+      <img title="link" ng-if="coin.icon" src="{{media + coin.icon +'?token='+token}}" height="50" />
+</div>
+
+
+<br>
+
+
+
+
+
+
+<br>
+
+
+
+
+
+<!-- <br>
+<h4 class="black">
+Admin Transactions
+</h4>
+<table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+<tbody style="border:none !important;">
+
+<tr  ng-repeat="p in transactions | filter:CryptoSales | orderBy:'-date_created'" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+  <td>{{p.amount | number:8}} {{p.symbol}} <h6 style="color:rgb(43, 116, 9) !important;">${{coin_usd(p.amount,p.symbol) || 0 | limitTo:4}}</h6></td>
+   <td>
+     <b ng-if="p.credited" class="red pull-right">Bought</b>
+     <b ng-if="!p.credited" class="green pull-right">Sold</b>
+ </td>
+</tr>
+</tbody>
+
+</table> -->
+
+
+<!-- <div ng-show="!transactions || (transactions | filter:CryptoSales).length < 1" class="text-center padding"><br><br><br>
+<b>No sales today</b>
+</div> -->
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div ng-include src="'templates/admin/popups/btc_recieve.html'"></div> -->
+    <div ng-include src="'templates/admin/popups/coin_send.html'"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <div ng-include src="'templates/admin/popups/view_transaction.html'"></div>
+
+
+
+
+
+ <div ng-include src="'templates/admin/popups/traders.html'"></div>
+
+ <div ng-include src="'templates/admin/popups/open_crypto.html'"></div>
+ 
+    <div ng-include src="'templates/admin/popups/coin_transactions.html'"></div>
+ 
+
+
+
+  <div ng-include src="'templates/admin/popups/logout.html'"></div>
+ 

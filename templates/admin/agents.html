@@ -1,0 +1,114 @@
+
+<div id="fh5co-page">
+    <div id="">
+  
+  
+  <div ng-include src="'templates/admin/include/banner.html'"></div>
+  
+  <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+  
+  
+  
+  <div class="col col-md-7">
+    <div class="box padding">
+        
+  
+        <section class="content-header">
+          <br><Br>
+
+        <div class="pull-right" style="float: right !important;">
+          <button data-toggle="modal" data-target="#createagent" class="btn btn-sm btn-blue pull-right">Add Agent +</button>
+          </div>  
+
+            <h2 class="black">Agents</h2>
+            <small class="black dark" style="color: black !important;">({{agents.length || 0}} Agents)</small>
+        </section>
+  
+
+        <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7" style="padding-top:10px !important;">
+          <input type="text" ng-model="srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search for agents...">
+        </div>
+        <br>
+        <br>
+      <table class="table">
+        <tbody style="border:none !important;">
+        <tr>
+          <th>Name</th>
+          <th>Trades</th>
+          <th>Points</th>
+          <th>Earnings</th>
+        </tr>
+  
+        <tr  ng-repeat="user in agents | filter:srch | orderBy:'-points'" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewcustomer" ng-click="select_customer(user)">
+          <td>{{user.full_name || (user.first_name+' '+user.last_name) | capitalize}}</td>
+          <td>{{(transactions | filter:tradeFilter(user.o_id)).length || 0}}</td>
+          <td>{{user.points || 0}}</td>
+          <td><b class="green">{{user.earnings_wallet.balance || 0 | currency}}</b></td>
+        </tr>
+        </tbody>
+      </table>
+    
+  
+  <div ng-show="!agents || agents.length < 1" class="text-center padding"><br><br><br>
+  <b>No agents on obictrade</b>
+  </div>
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  </div>
+  
+  
+  <div class="col col-md-3 col-sm-12 rightside" style="border-left: 1px solid red !important;background-color: black !important;">
+  <Br><Br>
+  
+      <div class="box padding" style="width: 100% !important; float: left !important;">
+        <div class="text-right" style="float: right !important;">    
+          <h2 style="color:rgb(59, 92, 22) !important;">{{reward_percent || 0 | number:2}}%</h2><br>
+           <a data-toggle="modal" data-target="#editreward" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">Edit Reward</a>
+        </div>  
+        <b>Reward Percent</b>
+    </div>
+  
+  
+      <br>
+  
+  
+      <div class="box padding" style="width: 100% !important; float: left !important;">
+        <div class="text-right" style="float: right !important;">    
+          <b style="color:rgb(127, 206, 37) !important;">NGN {{total_earnings(agents) || 0 | number:2}}</b>
+        </div>  
+        <b>Total Earnings</b>
+    </div>
+  
+  
+  
+    </div>
+  
+  </div>
+  </div>
+  
+  
+  
+  
+  <div ng-include src="'templates/admin/popups/view_customer.html'"></div>
+  
+  <div ng-include src="'templates/admin/popups/edit_reward.html'"></div>
+  
+  
+  
+  
+  <div ng-include src="'templates/admin/popups/create_agent.html'"></div>
+  <div ng-include src="'templates/admin/popups/open_crypto.html'"></div>
+  
+  
+  <div ng-include src="'templates/admin/popups/logout.html'"></div>
+  
+  
+  <div ng-include src="'templates/admin/popups/rates.html'"></div>
+  
+  

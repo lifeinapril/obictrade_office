@@ -1,0 +1,71 @@
+
+      
+  
+  <div class="modal fade bd-example-modal-lg" id="rates" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="media">
+                        <div class="media-body">
+                         
+               
+                <div class="col col-md-12">
+                  <img ng-if="selected_coin.icon" src="{{media + selected_coin.icon +'?token='+token}}" height="25" />
+                  <b>{{selected_coin.coin}} Traders</b>
+                  <br>
+                  <br>
+                  <div class="row">
+                    <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+                      <input type="text" ng-model="srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search rates...">
+                    </div>
+                    <br>
+                  </div>
+                  <br>
+                    <table class="table table-hover">
+                        <tbody>
+                          <tr  ng-if="selected_coin.rates.length > 0" style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);height: 30px !important;">
+                           <th>Name</th>
+                           <th>Balance</th>
+                           <th>Selling</th>
+                           <th>Buying</th>
+                    </tr>
+          
+                    <tr ng-repeat="p in selected_coin.rates | filter:srch | orderBy:'-buy_rate'" style="cursor:pointer;">
+                      <td>{{p.full_name || p.first_name +' '+ p.last_name | capitalize}}</td>
+                      <td style="color: rgb(196, 134, 21) !important;">{{p.balance || 0 | number:8}} {{selected_coin.coin | uppercase}}</td>
+                      <td><div class="badge badge-pill badge-warning" style="background-color: coral;">NGN {{p.buy_rate || 0 | number:2}} /$</div></td>
+                      <td><div class="badge badge-pill badge-warning" style="background-color: darkcyan;">NGN {{p.sell_rate || 0 | number:2}} /$</div></td>
+                    </tr>
+          
+              
+                    <div ng-if="selected_coin.rates.length < 1">
+                        <small><e>No affliates available for this coin yet.</e></small>
+                    </div>
+                      </tbody>
+                    </table>  
+
+                </div>
+                
+                        </div>
+
+                        <br>
+                    </div>
+                    </div>
+             
+                </div>
+
+      
+       
+       </div>
+
+    </div>
+    </div>
+  </div>
+  
+  

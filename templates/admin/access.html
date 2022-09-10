@@ -1,0 +1,62 @@
+
+    <head>
+        <title>ObicAdmin: Account Setup</title>
+       </head>
+
+<div id="text-center padding">
+    <a style="text-decoration:none; margin-bottom:10px !important;" class="row text-center">
+      <h3 class="text-center"><b style="color:rgb(10, 95, 134); font-size:30px;">Obic</b><b style=" font-size:30px;color:rgb(0, 0, 0);font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Admin</b></h3>
+    </a>
+    <div class="text-center">
+        <h6>Update your password</h6>
+        <b class="text-center">Hi {{admin.first_name}}, type in your new password, to secure your account</b>
+        
+        </div>
+        
+  
+    <div class="container">
+    <hr>
+    <h6 class="text-danger text-center" style="margin-top:-21px;">{{error}}</h6>
+     <form ng-submit="update_password(Form)" data-toggle="validator" class="form-horizontal" role="form">
+     
+     
+        <div class="form-group">
+        <label class="control-label col-sm-2" for="email"><b>Type new password</b> </label>
+        <div class="col-sm-10">
+          <input class="form-control"  placeholder="Enter your new password" type="password" ng-model="Form.password" id="password" required>
+        </div>
+      </div>
+     
+       
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email"><b>Confirm password</b> </label>
+        <div class="col-sm-10">
+          <input class="form-control" placeholder="Enter new password again" type="password" ng-model="Form.r_password" id="confirm_password" required>
+        </div>
+      </div>
+     
+      
+      <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-10 col-md-12">
+          <button ng-disabled="!Form.password || Form.password!=Form.r_password" type="submit" class="btn btn-default">
+               UPDATE
+          </button>
+        </div>
+      </div>
+
+    </form>
+    </div>
+    </div>
+    
+    
+
+<div ng-include="'shared/footer.html'"></div>
+<script>
+$('#password, #confirm_password').on('keyup', function () {
+  if ($('#password').val() == $('#confirm_password').val()) {
+    $('.form-control').css('border', '1px solid green');
+  } else 
+    $('.form-control').css('border', '1px solid red');
+});
+</script>
+

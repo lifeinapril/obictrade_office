@@ -1,0 +1,97 @@
+
+        
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+
+
+
+    <div class="col col-md-10">
+        <div class="content grade">
+<div id="container">
+            
+    <div class="col-sm-12 col-xs-12 col-md-12">
+     <div class="box login-box  center-box">
+      <br>
+      <b style="height:auto !important;color:#666;font-size:13px;line-height:15px;">Register a new administrator</b>
+     
+    <h6 class="text-danger text-center">{{error}}</h6>
+    <hr>
+            <form class="form-horizontal" ng-submit="register(form)">
+
+            <div class="form-group">
+            <label class="control-label col-sm-2" for="fname"><b>First name</b></label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="form.first_name" name="first_name" id="first_name" placeholder="Enter first name">
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="control-label col-sm-2" for="lname"><b>Last name </b></label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="form.last_name" name="last_name" id="last_name" placeholder="Enter last name">
+            </div>
+            </div>
+
+
+            <div class="form-group">
+            <label class="control-label col-sm-2" for="email"><b>Email </b></label>
+            <div class="col-sm-10">
+            <input type="email" class="form-control" autocomplete="false" ng-model="form.email" name="email" id="email" placeholder="Enter email">
+            </div>
+            </div>
+
+                <div class="form-group">
+                <label class="control-label">Access Level</label>
+                <div class="col-md-12">
+                  <select title="link" class="form-control" ng-model="form.access_level" ng-init="form.access_level==2">
+                    <option value="2" selected>Employee</option>
+                    <option value="1">Owner</option>
+                </select>
+                </div>
+                </div>
+
+
+                <div class="form-group" ng-if="admin.administrator.access.create_peer">
+                  <label class="control-label">Create peer connection</label>
+                  <div class="col-md-12">
+                    <input title="link" type="radio" class="form-control" ng-model="form.peer"/>
+                  </div>
+                  <div class="box" ng-if="form.peer">
+
+                    <div class="form-group">
+                      <label class="control-label col-sm-2"><b>Bank</b></label>
+                      <div class="col-sm-10">
+                        <select title="link" class="form-control" ng-model="form.bank.bank">
+                        </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="control-label col-sm-2"><b>Account Number</b></label>
+                      <div class="col-sm-10">
+                      <input type="number" class="form-control" ng-model="form.bank.account_number" placeholder="Account Number">
+                      </div>
+                    </div>
+                    
+                  </div>
+                  </div>
+
+                  
+                This administrator will be sent a link to their email to setup thier account
+                <br><br>
+            <div class="form-group"> 
+            <div class="col-sm-12 col-md-12">
+            <button  ng-disabled="!form.first_name || !form.last_name || !form.email" type="submit" class="btn btn-block btn-lg btn-blue btn-long btn-primary">Register</button>
+          <br><br>  
+          </div>
+            </div>
+           
+            </form>
+    </div>
+  </div>
+</div>
+
+        </div>
+    </div>

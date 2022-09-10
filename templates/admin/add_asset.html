@@ -1,0 +1,351 @@
+<style>
+.cobo{
+       width:20px;
+       height: 20px;
+       border-radius: 360px;
+       border: none;
+       float:right;
+       display: block;
+       background: #fff;
+       margin-left:6px;
+     }
+</style>
+<div id="fh5co-page">
+        <div id="row">
+      
+          <div ng-include src="'assets/banner.html'"></div>
+       
+          <div class="col col-md-2" ng-include src="'assets/side.html'"></div>
+          
+      <div class="col col-md-10">
+      <br>
+        <section class="content-header">
+            <h1>
+             Add Products
+            </h1>
+          </section>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <form ng-submit="add_product(product)" class="col col-md-12">
+    
+            <div class="row">
+                    <button type="submit" class="btn btn-sm btn-warning pull-right">Save</button>
+            </div>
+
+            <div class="row">
+                    <div class="col col-md-6">
+<br><Br>
+  <div ng-if="files" style="width:100%;float:left;height:auto;">
+    <div ng-repeat="file in files" style="margin:17px; width:auto; height:auto;float:left;">
+    <img  title="link" ngf-src="file" style="margin:10px; width:180px; height:auto;float:left;">
+    </div>
+</div>
+  <br>
+                            <div class="form-group">
+                                    <label for="exampleInputFile">Upload Photos of product</label>
+                                    <input  ng-model="files" name="files" ngf-select="photo_up($files)"  multiple="multiple" type="file"  id="exampleInputFile" required>
+                                    <p class="help-block">You can upload more than 1 image but not more than 3.</p>
+                                  </div>
+
+                            <!-- <div class="box-body">
+                                    <img class="img-responsive pad" src="../images/x.JPG" alt="Photo">
+                                  </div> -->
+                                  <div class="box-footer">
+                                        <form action="#" method="post">
+                                          <div class="img-push">
+                                            <textarea ng-model="product.description" rows="4" class="input-sm" style="background-color:#fff !important;color:#333 !important; width:100%; border:none;" placeholder="Product description" required></textarea>
+                                          </div>
+                                        </form>
+                                      </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <div class="col col-md-6">
+                            <div class="form-group form-group-sm">
+                              <label>Name of product</label>
+                              <input type="text" required  ng-model="product.name" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+                            </div>
+
+
+                            <div class="form-group form-group-sm">
+                              <label>Brand of product</label>
+                              <input type="text" required  ng-model="product.productbrand" list="brands" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+                            <datalist id="brands">
+                              <option ng-repeat="p in products" value="{{p.productbrand}}">{{p.productbrand}}</option>
+                            </datalist>
+                            </div>
+                                   
+
+                                     
+                                          
+<div class="row">
+
+          
+        <div class="col col-md-6">
+                <div class="form-group form-group-sm">
+                        <label>Price of product</label>
+                        <input type="number"  required ng-model="product.price" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+                      </div>
+            </div>
+
+        <div class="col col-md-6">
+
+            <div class="form-group form-group-sm">
+                <label>Cost of product</label>
+                <input type="number" value="0"  required ng-model="product.cost" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+            </div>
+    
+        </div>
+  
+</div>
+
+
+<div class="form-group form-group-sm">
+    <label>supplier ID</label>
+    <input type="text" ng-model="product.supply_id" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+  </div>
+
+
+<div class="form-group form-group-sm">
+    <label>Quantity of product</label>
+    <input type="number" value="3"  required ng-model="product.quantity" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+  </div>
+
+
+<div class="form-group form-group-sm">
+        <label>type of product</label>
+        <input type="text"  required ng-model="product.type" list="types" class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" />
+        <datalist id="types">
+            <option ng-repeat="p in products" value="{{p.type}}">{{p.type}}</option>
+          </datalist>
+      </div>
+
+
+
+                                          <div class="form-group form-group-sm" style="margin-bottom:10px;">
+                                                <label>Application of product</label>
+                                                <select  required ng-model="product.application" class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                  <option selected="selected">Lips</option>
+                                                  <option>Face</option>
+                                                  <option>Eyes</option>
+                                                  <option>Hair</option>
+                                                  <option>Cheek</option>
+                                                </select>
+                                              </div>
+
+
+
+
+                                              <span class="form-group form-group-sm select2-selection select2-selection-multiple" aria-haspopup="true" tabindex="-1">     
+                                                <label>Colors of product</label>
+                                               <fieldset style="border:1px solid #fff; padding:5px;">
+                                                  <div style="width:100%;float:left;" class="text-center">
+                                                    <n style="font-size:14px; opacity:0.7;" ng-if="selected_colors.length < 1">no color selected</n>
+                                                      <div ng-click="minuscolor(sc)" ng-repeat="sc in selected_colors | orderBy:'-_id'" class="ddd2">
+                                                          {{sc.name}} <div class="cobo" style="background-size:cover; background-color:{{sc.color}}; background-image: url({{media}}{{sc.photo +'?token='+token}})"></div>
+                                                          </div>
+                                                  </div>
+                                                  <br>
+                                                <div class="row">
+                                                    <input type="text" placeholder="search for color" ng-model="csrch" class="form-control" style="width: 60% !important;float:left;margin-left:15px;" />                                 
+                                                    <button data-toggle="modal" data-target="#addcolor" style="float:left;background-color:purple;color:#fff;" class="btn btn-sm">Add new color</button>
+                                                 </div>
+                                                 <div class="text-center row">
+                                                    <b class="text-center light">select product colors from color pool</b>
+                                                    </div><Br>
+                                                <div class="customs-select">
+                                                    <div ng-click="addcolor(c)" ng-repeat="c in colors | orderBy:'-_id' | filter:csrch" class="ddd">
+                                                     {{c.name}}<div class="cobo" style="background-size:cover; background-color:{{c.color}}; background-image: url({{media}}{{c.photo +'?token='+token}});"></div>
+                                                    </div>
+                                                </div>
+                                               </fieldset>
+                                              </span>
+
+
+                                              <br>
+
+
+                                              
+                                              <span class="form-group form-group-sm select2-selection select2-selection-multiple" aria-haspopup="true" tabindex="-1">     
+                                                  <label>Product sizes</label>
+                                                 <fieldset style="border:1px solid #fff; padding:5px;">
+                                                    <div style="width:100%;float:left;" class="text-center">
+                                                      <n style="font-size:14px; opacity:0.7;" ng-if="selected_sizes.length < 1">no size selected for product</n>
+                                                        <div ng-click="minussize(s)" ng-repeat="s in selected_sizes | orderBy:'-_id'" class="ddd2">
+                                                            {{s.size}}
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                  <div class="row">
+                                                      <input type="text" placeholder="search for sizes" ng-model="ssrch" class="form-control" style="width: 60% !important;float:left;margin-left:15px;" />                                 
+                                                      <button data-toggle="modal" data-target="#addsize" style="float:left;background-color:black;color:#fff;" class="btn btn-sm">Add new size</button>
+                                                   </div>
+                                                   <div class="text-center row">
+                                                      <b class="text-center light">select product sizes from size pool</b>
+                                                      </div><Br>
+                                                  <div class="customs-select">
+                                                      <div ng-click="addsize(s)" ng-repeat="s in sizes | orderBy:'-_id' | filter:ssrch" style="float:left; padding:15px;background-color:#fff; color:#333; margin-left:10px;cursor:pointer;">
+                                                      <b> {{s.size}}</b>
+                                                      </div>
+                                                  </div>
+                                                </fieldset>
+                                                </span>
+
+
+                                              
+                    </div>
+            </div>
+
+    <Br>
+    
+  
+    
+
+
+
+    
+    
+    
+    
+    
+    
+    
+        </form>
+              
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        </div>
+            </div>
+         
+      </div>
+      
+    
+    
+    
+    
+    
+
+  <div class="modal modal-danger fade in" id="addcolor">
+      <div class="modal-dialog">
+        <form class="modal-content" ng-submit="add_color(co)">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Add color</h4>
+          </div>
+          <div class="modal-body">
+            <p>Add a new color to the collection of colors in database and select it for your product</p>
+            <br>
+            <div class="row">
+              <div class="col col-md-12">
+                <div class="form-group has-feedback">
+                  <input ng-model="co.name" type="text" class="form-control" placeholder="Color name" required>
+                </div>
+              </div>
+
+              
+              <div class="col col-md-12">
+                    <select title="link" ng-model="l.w" class="form-control">
+                      <option value="picker" selected>COLOR PICKER</option>
+                      <option value="code">COLOR CODE</option>
+                      <option value="picture">COLOR IMAGE</option>
+                      </select>
+                      <br>
+                </div>
+            
+
+              <div ng-show="l.w=='picker'" class="col col-md-12">
+                <div class="form-group has-feedback">
+                  <input ng-model="co.color" type="color" class="form-control" placeholder="Color picker">
+                </div>
+              </div>
+
+              <div ng-show="l.w=='code'" class="col col-md-12">
+                  <div class="form-group has-feedback">
+                    <input ng-model="co.color" type="text" class="form-control" placeholder="Color code">
+                  </div>
+                </div>
+
+              <div ng-show="l.w=='picture'" class="col col-md-12">
+                <div class="form-group has-feedback">
+                  <input ng-model="co.photo" type="file" name="file" ngf-select="colorpicture($file)" class="form-control" placeholder="Color photo">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button ng-disabled="!co.color && !co.photo" type="submit" class="btn btn-outline">add color</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+  <div class="modal modal-danger fade in" id="addsize">
+      <div class="modal-dialog">
+        <form class="modal-content" ng-submit="add_size(s)">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Add size</h4>
+          </div>
+          <div class="modal-body">
+            <p>Add a new size to the collection of sizes in database and select it for your product</p>
+            <br>
+            <div class="row">
+                <div class="col col-md-6">
+                  <div class="form-group has-feedback">
+                    <input ng-model="s.size" type="text" class="form-control" placeholder="size" required>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+            <button ng-disabled="!s.size" type="submit" class="btn btn-outline">add size</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+    
+    
+      

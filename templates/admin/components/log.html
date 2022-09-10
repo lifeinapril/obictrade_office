@@ -1,0 +1,20 @@
+<div class="box">
+    <div class="text-left" style="padding: 10px;">
+        <div style="color: #323232;">
+          <b data-toggle="modal" data-target="#viewadmin" ng-click="select_admin(log.admin)">{{log.admin.account.full_name}}</b> <br>
+          <span class="badge badge-secondary" ng-if="log.admin.role==4">Support</span>
+          <span class="badge badge-secondary" ng-if="log.admin.role==3">Accounting</span>
+          <span class="badge badge-secondary" ng-if="log.admin.role==2">Sales</span>
+          <span class="badge badge-secondary" ng-if="log.admin.role==1">Manager</span>
+          <span class="badge badge-secondary" ng-if="log.admin.role==0">Owner</span>
+          <br>
+          {{log.message}}
+        </div>
+        <br>
+        <i style="font-size:13px;color: #323232;">{{log.date_created | date: ' EEEE, MMMM d, y.     h:mm a'}}</i>
+    </div>
+</div>
+
+
+
+

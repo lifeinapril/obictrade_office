@@ -1,0 +1,14 @@
+<tr>
+     <td>{{p.name}}</td>
+    <td>
+      <b ng-if="p.type=='cryptocurrency'">{{p.symbol || '$'}} {{p.amount || 0 | number:8}}</b>
+      <div ng-if="p.type=='gift card'">
+        <b ng-if="card.quantity > 0" ng-repeat="card in p.cards">{{p.symbol || '$'}} {{card.amount || 0}} ,</b>
+      </div>
+    </td>
+    <td>
+        <b ng-if="p.status==1" class="pull-right">Pending...</b>
+        <b ng-if="p.status==2" class="green pull-right">Successful</b>
+        <b ng-if="p.status==0" class="red pull-right">Declined</b>
+    </td>
+  </tr>

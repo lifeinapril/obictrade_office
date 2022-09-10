@@ -1,0 +1,35 @@
+
+      
+  
+  <div class="modal modal-default fade in" id="editreward">
+    <div class="modal-dialog  modal-sm">
+      <form class="modal-content" enctype="multipart/form-data" ng-submit="set_reward(form)">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+          <h4 class="modal-title text-center" style="color:#333;"><b>Edit Reward</b></h4>
+        </div>
+        <div class="modal-body">
+            <div class="box">
+              <h6 class="text-danger text-center">{{error}}</h6>
+                    
+                      <div class="form-group">
+                      <label><b>Reward Percentage (%)</b></label>
+                      <div class="row" style="padding:10px !important;">
+                          <input type="text" ng-model="form.percent" name="reward" id="reward" placeholder="0.1">
+                      </div>
+                      </div>
+          <br>
+          
+
+
+              </div>
+        </div>
+        <div class="modal-footer text-center center">
+            <button  ng-disabled="!form.percent" type="submit" class="btn btn-block btn-lg btn-blue btn-long btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  

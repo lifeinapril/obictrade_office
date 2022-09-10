@@ -1,0 +1,112 @@
+
+      
+  
+  <div class="modal fade bd-example-modal-lg" id="viewpeer" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <h2 class="text-center black" ng-if="selected_peer.credit">Deposit</h2>
+            <h2 class="text-center black" ng-if="!selected_peer.credit">Transfer</h2>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="media-body" ng-if="selected_peer.user" style="padding:14px !important;">
+                    <h4 style="color: black !important;">Customer</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><v>Name</v> <b class="pull-right">{{selected_peer.user.full_name}}</b></li>
+                        <li class="list-group-item"><v>Email</v> <b class="pull-right">{{selected_peer.user.email}}</b></li>
+                        <li class="list-group-item"><v>Phone Number</v> <b class="oran pull-right">(+{{selected_peer.user.phone_format}}){{selected_peer.user.phone}}</b></li>
+                    </ul>
+                </div>
+
+                <div class="row" ng-if="selected_peer.bank" style="padding:14px !important;"> 
+                    <h4 style="color: black !important;">Bank details</h4>
+                    <h5 style="color: black !important;">Transfer to this account to complete transaction</h5>
+                    <div class="media-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><v>Bank</v> <b class="pull-right">{{selected_peer.bank.Name | capitalize}}</b></li>
+                            <li class="list-group-item"><v>Account Name</v> <b class="pull-right">{{selected_peer.account_name | capitalize}}</b></li>
+                            <li class="list-group-item"><v>Account Number</v> <b class="oran pull-right">{{selected_peer.account_number}}</b></li>
+                        </ul>
+                    </div>
+                </div>  
+
+            </div>
+
+
+
+            <div class="col-md-6 col-sm-12">
+
+               
+                    <b style="color: black !important;font-size: 20px !important;">{{selected_peer.name | capitalize}}</b><br>
+                    <b class="orange">{{selected_peer.type | capitalize}}</b><br>
+                       
+                       
+                    <div class="list-group">
+                        <li class="list-group-item">
+                            <v>Amount</v> 
+                            <b class="pull-right" ng-class="selected_peer.credit ? 'green':'red'"> {{selected_peer.amount || 0 | currency}}</b>
+                        </li>
+                        <li class="list-group-item" ng-if="selected_peer.fee">
+                            <v>Fee</v> 
+                            <b class="pull-right" ng-class="selected_peer.credit ? 'green':'red'"> {{selected_peer.fee || 0 | currency}}</b>
+                        </li>
+                    </div>
+
+                    <ul class="list-group">
+                        <!-- <li class="list-group-item"><v>Asset Type</v> <b class="orange pull-right">{{selected_peer.type | capitalize}}</b></li> -->
+                        <li class="list-group-item">
+                            <v>Transaction Reference</v> 
+                            <b class="black pull-right"> {{selected_peer.o_id || '...'}}</b>
+                        </li>
+                        <li class="list-group-item">
+                            <v>Status</v>
+                            
+                            <b ng-if="selected_peer.status==1" class="pull-right">Pending...</b>
+                            <b ng-if="selected_peer.status==2" class="green pull-right">Successful</b>
+                            <b ng-if="selected_peer.status==0" class="red pull-right">Declined</b>
+                        </li>
+                        <li class="list-group-item"><v>Date</v> <small class="pull-right">{{selected_peer.date_created | date:"MMMM d, y,  hh:mm a"}}</small></li>
+                        <li class="list-group-item">
+                            <v>PeerID</v> 
+                            <small>(ID of administrator)</small>
+                            <b class="black pull-right"> {{selected_peer.peer_id || '...'}}</b>
+                        </li>
+                        
+                    </ul>
+                    <br>
+                    <div class="form-group">
+                        <label style="color:#333;">Message:</label>
+                        <textarea ng-if="selected_peer.status==1" ng-model="selected_peer.message" class="form-control" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Message For Customer">
+                        </textarea>
+                        <v ng-if="selected_peer.status!=1">{{selected_peer.message || 'No message.'}}</v>
+                    </div>
+
+
+            </div>
+        </div>
+
+       </div>
+        <div class="modal-footer text-center center" ng-if="selected_peer.status==1">  
+                <div ng-if="admin.administrator.peer_id!=selected_peer.peer_id">
+                    &nbsp;&nbsp;&nbsp;<e>This payment can't be authorized/confirmed by you</e>
+                </div>
+                <br/>
+                <div  ng-if="admin.administrator.access.grant_peer && admin.administrator.peer_id==selected_peer.peer_id">
+                    <a  ng-click="decline_peer(selected_peer)" class="btn btn-danger">Decline</a>&nbsp;&nbsp;&nbsp;
+                    <a  ng-click="approve_peer(selected_peer)" class="btn btn-primary">Approve</a>
+                </div>
+        </div>
+
+
+<br><br><br>
+
+    </div>
+    </div>
+  </div>
+  
+  

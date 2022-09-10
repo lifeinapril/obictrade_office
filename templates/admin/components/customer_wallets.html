@@ -1,0 +1,47 @@
+ 
+                                
+                               <ul class="list-group">
+  
+  
+                                  <li class="list-group-item black">
+                                     <v class="oran pull-right">
+                                       {{selected_customer.bitcoin_wallet.balance || 0 | number:8}} BTC 
+                                       <h5 class="green">${{ (selected_customer.bitcoin_wallet.balance * bitcoin.selling.usd) || 0 | number:2}}</h5>
+                                     </v>
+                                     <img title="link" src="{{media + 'crypto/btc.png'}}" height="30" style="margin: 10px !important;"/>
+                                       <b class="black">Bitcoin Wallet</b>
+
+                                      <div class="box" style="padding: 5px !important;">    
+                                          <h6 style="color:rgb(92, 34, 7) !important;">{{selected_customer.bitcoin_wallet.address || "...."}}</h6>
+                                      </div>
+                                  </li>
+  
+  
+                                  <li class="list-group-item">
+                                    <v class="oran pull-right">
+                                      {{selected_customer.ethereum_wallet.balance || 0 | number:8}} ETH <h5 class="green">${{(selected_customer.ethereum_wallet.balance * ethereum.selling.usd) || 0 | number:2}}</h5>
+                                    </v>
+                                    <img  title="link" src="{{media + 'crypto/eth.png'}}" height="30" style="margin: 10px !important;" />
+                                     <b class="black"> Ethereum Wallet </b>
+                                    
+                                      <div class="box" style="padding: 5px !important;">    
+                                          <h6 style="color:rgb(92, 34, 7) !important;">{{selected_customer.ethereum_wallet.address || "...."}}</h6>
+                                      </div>
+                                 </li>
+  
+  
+                                 <li class="list-group-item">
+                                  <v class="oran pull-right">
+                                    {{selected_customer.usdt_wallet.balance || 0 | number:8}} USDT <h5 class="green">${{(selected_customer.usdt_wallet.balance * usdt.selling.usd) || 0 | number:2}}</h5>
+                                  </v>
+                                  <img title="link" src="{{media + 'crypto/usdt.png'}}" height="30" style="margin: 10px !important;" />
+                                   <b class="black"> USDT Wallet </b>
+                                  
+                                      <div class="box" style="padding: 5px !important;">    
+                                          <h6 style="color:rgb(92, 34, 7) !important;">{{selected_customer.usdt_wallet.address || "...."}}</h6>
+                                      </div>
+                               </li>
+  
+                               </ul>
+                               <br>
+                         

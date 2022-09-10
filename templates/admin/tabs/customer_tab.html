@@ -1,0 +1,188 @@
+<div class="nav-tabs-custom no-border" style="min-height: 580px !important;">
+    <ul class="nav nav-tabs row no-border"> 
+        <li class="active"><a data-target="#transactions" data-toggle="tab">Payments</a></li>
+        <li class=""><a data-target="#sales" data-toggle="tab">Trades</a></li>
+        <li class=""><a data-target="#activity" data-toggle="tab">Activity</a></li>
+        <li class=""><a data-target="#wallets" data-toggle="tab">Wallets</a></li>
+        <li class=""><a data-target="#settings" data-toggle="tab">Settings</a></li>
+    </ul>
+    <div class="tab-content" style="background-color:rgba(19, 17, 17, 0) !important">
+    
+                                          <div class="tab-pane active" style="background-color:rgba(199, 41, 41, 0.014) !important" id="transactions">
+                                            <ul class="list-group">
+                                              <li class="list-group-item"><v class="black">Naira Balance</v> <v class="green pull-right">{{selected_customer.naira_wallet.balance || 0 | currency}}</v></li>
+                                              <a data-toggle="modal" data-target="#naira_history" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">Wallet Transactions</a>
+                                            </ul>
+                                              <br>
+                                                        <div class="p-2 text-center">
+                                                            <div class="row">
+                                                                <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+                                                                  <input type="text" ng-model="srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(0, 0, 0);" placeholder="Search for transactions">
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+                                                                  <select title="peer" ng-model="dropfilter" ng-change="filter_status(dropfilter)">
+                                                                    <option value="" selected>All</option>
+                                                                    <option value="1" selected>Pending</option>
+                                                                    <option value="2" selected>Successful</option>
+                                                                    <option value="0" selected>Declined</option>
+                                                                  </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <bR>
+                                        
+                                                             <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+                                                                    <tbody>
+                                                                       
+                                                                        <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);height: 30px !important;">
+                                                                            
+                                                                          <th>Date</th>
+                                                                          <th>Type</th>
+                                                                            <th>Amount</th>
+                                                                        </tr>
+                            
+                                                                        <tr style="color:rgb(0, 0, 0) !important;" ng-include src="'templates/admin/components/transaction_list.html'" ng-repeat="p in peers.concat(selected_customer.naira_wallet.transactions) | filter:srch | filter:{o_id:selected_customer.o_id,status:dropfilter} | unique:'transaction_id' | orderBy:'-date_created' | limitTo:55"  data-toggle="modal"  data-dismiss="modal" data-target="#viewpeer" ng-click="select_peer(p)">
+                                                                        </tr>
+                                                                    </tbody>
+                                                             </table>
+                                                        </div>
+      
+                                                        <div class="p-2 text-center" ng-if="!peers || (peers | filter:{o_id:selected_customer.o_id}).length < 1">
+                                                        <br>
+                                                        <b class="black">No Transactions Done.</b>
+                                                        <br>
+                                                        <br>
+                                                        </div>
+      
+    
+                                          </div>
+    
+    
+    
+    
+                                        
+                                          <div class="tab-pane" style="background-color:rgba(199, 41, 41, 0.014) !important" id="sales">
+                                          
+                                            <div class="p-2 text-center">
+                                                <div class="row">
+                                                    <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+                                                      <input type="text" ng-model="srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(0, 0, 0);" placeholder="Search for sales and purchases">
+                                                    </div>
+                                                    <div class="col-md-3 col-sm-3 col-xs-3 pull-right">
+                                                      <select title="select" ng-model="dropfilter" ng-change="filter_status(dropfilter)">
+                                                        <option value="" selected>All</option>
+                                                        <option value="1" selected>Pending</option>
+                                                        <option value="2" selected>Successful</option>
+                                                        <option value="0" selected>Declined</option>
+                                                      </select>
+                                                    </div>
+                                                </div>
+
+                                                <bR>
+                            
+                                                 <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+                                                        <tbody>
+                                                            <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                              <th>Transaction Type</th>
+                                                              <th>Amount</th>
+                                                               <th>Status</th>
+                                                            </tr>
+                                                            <tr style="color:rgb(0, 0, 0) !important;" ng-include src="'templates/admin/components/sales_list.html'" ng-repeat="p in transactions | filter:srch | filter:{o_id:selected_customer.o_id,status:dropfilter} | orderBy:'-date_created' | limitTo:55"  style="cursor:pointer;" data-toggle="modal" data-dismiss="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+                                                            </tr>
+                                                        </tbody>
+                                                 </table>
+                                            </div>
+
+                                            <div class="p-2 text-center" ng-if="!transactions || (transactions | filter:{o_id:selected_customer.o_id}).length < 1">
+                                            <br>
+                                            <b class="black">No sales Done.</b>
+                                            <br>
+                                            <br>
+                                            </div>
+
+
+                                    </div>
+
+
+                                    <div class="tab-pane" style="background-color:rgba(199, 41, 41, 0.014) !important" id="activity">
+                                      <ul class="list-group">
+                                        <li class="list-group-item">
+                                          <b class="black">Last Login</b><br> <h5 class="black">{{selected_customer.login_date | date:"MMMM d, y,  hh:mm a"}}</h5>
+                                        </li>
+                                        <li class="list-group-item">
+                                          <b class="black">Date created</b><br> <h5 class="black">{{selected_customer.date_created | date:"MMMM d, y,  hh:mm a"}}</h5>
+                                        </li>
+                                    </ul>    
+                                      <div class="row">
+                                        <div class="input-group-sm col col-md-12 col-sm-12 col-xs-12">
+                                          <input type="text" ng-model="log_srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(0, 0, 0);" placeholder="Search activity">
+                                        </div>
+                                        </div>
+                                        <br>
+                                        <div class="timeline" style="overflow-y: scroll !important;height: 700px !important;">
+      
+                                            <div class="box" ng-repeat="log in notes | filter:selected_customer._id | orderBy:'-date' | filter:log_srch | limitTo:70">
+                                                <div class="text-left" style="padding: 10px;">
+                                                      <h4 style="color: black !important;">{{log.title}}</h4> 
+                                                      <h5 style="color: black !important;">{{log.message}}</h5>
+                                                    <h6 style="color: black !important;">{{log.date | date: ' EEEE, MMMM d, y.  h:mm a'}}</h6>
+                                                </div>
+                                            </div>
+                                  
+                                        </div>
+                                
+                                        <div ng-if="!notes || (notes  | filter:selected_customer._id).length < 1" class="text-center padding">
+                                            <br><br><br>
+                                                <b class="black">No logs</b>
+                                            <br>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="tab-pane" style="overflow-y: scroll !important;height: 700px !important;background-color:rgba(199, 41, 41, 0.014) !important" id="wallets">
+                                      <ul class="list-group">
+                                        <li class="list-group-item"><v class="black">Assets value</v> <v class="green pull-right">${{
+                                          ((selected_customer.bitcoin_wallet.balance * bitcoin.selling.usd)+
+                                          (selected_customer.ethereum_wallet.balance * ethereum.selling.usd)+
+                                          (selected_customer.usdt_wallet.balance * usdt.selling.usd)) || 0 
+                                        | number:2 }}</v></li>
+                                       </ul> 
+                                      <div ng-include src="'templates/admin/components/customer_wallets.html'">
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" style="overflow-y: scroll !important;height: 700px !important;background-color:rgba(199, 41, 41, 0.014) !important" id="settings">
+                                   
+                                      <div class="box">
+                                        <br>
+                                        <div class="padding list-group">
+                                          <h5 style="color: black !important;">If you suspend this account, customer won't be able to login and plcae trades.</h5>
+                                          <button  ng-if="!selected_customer.suspended" class="btn btn-sm" style="background-color: orange !important;color: white !important;" ng-click="suspend_account(selected_customer)">
+                                            Suspend Account
+                                          </button>
+                                          <button  ng-if="selected_customer.suspended" class="btn btn-sm" style="background-color: rgb(14, 235, 6) !important;color: white !important;" ng-click="activate_account(selected_customer)">
+                                            Activate Account
+                                          </button>
+                                        </div>
+                                        <br>
+                                        <li ng-if="admin.access.terminate_account" class="list-group-item">
+                                          <input ng-model="terminate_key" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="enter customer's obic ID" required>     
+                                        <br><br>
+                                          <button  ng-disabled="terminate_key!=selected_customer.o_id" class="btn btn-danger btn-sm" ng-click="terminate_account(selected_customer)">
+                                          <span class="ti ti-shutdown"></span> Terminate Account
+                                        </button>
+                                        </li>
+                                    
+                                      </div>
+
+                                    </div>
+
+    
+    
+    </div>
+</div>
+    
+    
+    
+    
+    

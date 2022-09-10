@@ -1,0 +1,76 @@
+
+      
+  
+  <div class="modal fade bd-example-modal-lg" id="viewrequest" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <h2 class="text-center black">Request</h2>
+                        
+            <div ng-if="selected_request" style="padding:14px !important;">
+                <ul class="list-group">
+                    <li class="list-group-item"><v>Name</v> <b class="pull-right">{{selected_request.full_name || (selected_request.first_name + ' ' + selected_request.last_name) }}</b></li>
+                    <li class="list-group-item">
+                        <v>Email</v> 
+                        <b class="pull-right">{{selected_request.email}}</b>
+                        <small ng-if="!selected_request.email_verified" class="red">(unverified)</small>
+                        <small ng-if="selected_request.email_verified" class="green">(verified)</small>
+                    </li>
+                    <li class="list-group-item">
+                        <v>Phone Number</v> 
+                        <b class="oran pull-right">({{selected_request.phone_format}}){{selected_request.phone}}</b>
+                        <small ng-if="!selected_request.phone_verified" class="red">(unverified)</small>
+                        <small ng-if="selected_request.phone_verified" class="green">(verified)</small>
+                    </li>
+                    <li class="list-group-item"><v>Obic ID</v> <b class="pull-right">{{selected_request.o_id}}</b></li>
+                </ul>
+
+        <h6><e class="red" ng-show="!selected_request.bank_account.bank.Name">This customer hasn't verified there's deposit account</e></h6>
+        <div ng-if="selected_request.bank_account.bank.Name">
+              <b class="padding">Bank Details</b><br>
+              <ul class="list-group">
+                  <li class="list-group-item" style="padding: 10px !important;border: none !important;">
+                      <v>{{selected_request.bank_account.bank.Name || '...'}}</v>
+                      <v class="pull-right" style="color: rgb(70, 70, 167) !important;">{{selected_request.bank_account.account_number}}</v>
+                  </li>
+              </ul>
+        </div>
+
+          
+                <div class="row text-center">
+                    <button ng-if="selected_request.documents.length > 0" ng-click="download_doc(selected_request.documents)" class="btn btn-blue">Download {{selected_request.document_type}}</button>
+                    <e ng-if="!selected_request.documents || selected_request.documents.length < 1">No document uploaded</e>
+                </div>
+            
+
+                <div class="col col-md-12">
+                         <div class="form-group">
+                        <label style="color:#333;">Message:</label>
+                        <textarea ng-model="selected_request.message" class="form-control" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Message For Customer">
+                        </textarea>
+                      </div>
+                </div>
+
+            </div>
+
+       </div>
+
+
+        <div class="modal-footer text-center center">
+            <a ng-click="decline_affiliate(selected_request)" class="btn btn-danger">Decline</a>&nbsp;&nbsp;&nbsp;
+            <a ng-click="approve_affiliate(selected_request)" class="btn btn-primary">Approve</a>
+        </div>
+
+
+<br><br><br>
+
+    </div>
+    </div>
+  </div>
+  
+  

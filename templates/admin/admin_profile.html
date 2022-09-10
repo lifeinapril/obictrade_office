@@ -1,0 +1,98 @@
+<div id="fh5co-page">
+    <div>
+  
+      <div ng-include src="'assets/n_admin/banner.html'"></div>
+   
+      <div class="col col-md-2" ng-include src="'assets/n_admin/side.html'"></div>
+      
+  <div class="col col-md-10">
+  
+      <section class="content-header">
+              <h1>
+                Profile
+                <small>Home</small>
+              </h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active"> Profile</li>
+              </ol>
+            </section>
+  
+  
+            <section class="content grade">
+                
+                      <div class="row">
+
+                        <div class="col-md-3">
+                            
+                          <div class="box box-secondary" style="box-shadow:0px 2px 20px 0px rgba(0, 0, 0, 0.589) !important;">
+                            <div class="box-body box-profile">
+                              <img class="profile-user-img img-responsive img-circle" src="{{media}}{{n_admin.photo +'?token='+token}}" alt="User profile picture">
+                
+                              <h3 style="color:rgb(240, 238, 235) !important;" class="text-center">{{n_admin.first_name}} {{n_admin.last_name}}</h3><br>
+                              <b class="text-center">{{n_admin.email}}</b><br>
+                              <b class="text-center">{{n_admin.phone}}</b>  <br>    
+                                  <b>Registered On</b> <a class="pull-right" style="color:rgb(240, 238, 235) !important;" >{{n_admin.date_created | date}}</a>
+                              <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+                            </div>
+                          </div>
+                        </div>
+                        
+
+
+                        <div class="col-md-9">
+                          <div class="nav-tabs-custom bg-black">
+                            <ul class="nav nav-tabs row"> 
+                                <li class=""><a data-target="#timeline" data-toggle="tab">Timeline</a></li>
+                            </ul>
+                            <div class="tab-content" style="background-color:rgb(19, 17, 17) !important">
+                              
+                              <div class="tab-pane" style="background-color:rgba(199, 41, 41, 0.014) !important" id="timeline">
+                                <h2>Recent Activities</h2>
+                                <hr>
+                                  <div class="timeline">
+
+                                      <div class="box" ng-repeat="log in logs | orderBy:'-date' | filter:{m_id:n_admin.m_id} | limitTo:10">
+                                        <div class="text-left" style="padding: 10px;">
+                                          <v style="color: #323232;"><b>{{log.n_admin.first_name}} {{log.n_admin.last_name}}</b> 
+                                            <span class="badge badge-secondary" style="background-color:orangered !important;" ng-if="log.role=='n_admin'">{{log.role}}</span> 
+                                            <span class="badge badge-secondary" style="background-color:rgb(123, 255, 0) !important;" ng-if="log.role=='rider'">{{log.role}}</span> 
+                                            <span class="badge badge-secondary" style="background-color:rgb(98, 0, 255) !important;" ng-if="log.role=='manager'">{{log.role}}</span> 
+                                            {{log.message}}</v><br>
+                                          <i style="font-size:13px;color: #323232;">{{log.date | date: ' EEEE, MMMM d, y.     h:mm a'}}</i>
+                                        </div>
+                                      </div>
+                        
+                        </div>
+                              </div>
+
+
+
+
+
+                            </div>
+
+                          </div>
+                        </div>
+                        
+                      </div>
+                      
+                
+                    </section>
+
+
+          </div>
+        </div>
+     
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

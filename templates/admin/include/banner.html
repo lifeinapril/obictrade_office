@@ -1,0 +1,164 @@
+<div class="hidden-md hidden-lg" id="banner" style="background-color:rgb(16, 29, 56) !important;z-index:100000000000000 !important;position: fixed !important;width:100vw !important;float: left !important;padding: 12px !important;height: auto !important;margin-bottom:20px !important;">
+             
+    <a class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="background-color:transparent; margin-right:0px;">
+      <span class="fa fa-angle-down" style="color:rgb(255, 255, 255) !important;font-size:25px; margin-top:-5px;"></span>
+  </a>
+  
+      
+<div class="nav navbar-nav navbar-left text-center" style="background:none;">
+    <a title="link" href="/" style="text-decoration:none;background:none;">
+    <img  title="logo" src="images/obic.png" height="30" style="margin-top:10px; margin-left: 30px !important;float:left !important;" />               
+    </a>
+</div>
+      
+      
+    
+  <div class="collapse navbar-collapse" id="myNavbar" style="background-color: rgba(0, 18, 32, 0.301) !important;color:white !important;padding-top:9px;">
+   
+   
+         
+      <ul class='nav navbar-nav navbar-right' style="padding-top:5px;margin-top:5px;margin-right:20px;">
+          <li class='dropdown'>
+              <a  style="margin-top: 0px;" href='/office/dashboard' style="color:rgb(20, 20, 20) !important;">
+                  <i class="fa fa-th-large orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Overview</b>
+              </a>
+          </li>
+      </ul>     
+      
+      
+            
+  
+                 
+      <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.transactions" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/transactions' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-tags orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Trades</b>
+                <span ng-if="(transactions | filter:{status:1}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(transactions | filter:{status:1}).length || 0}}</span>
+           </a>
+        </li>
+    </ul>     
+
+    
+      
+      <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.customers" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/customers' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-users orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Users</b>
+            </a>
+        </li>
+    </ul>     
+
+
+
+
+
+     
+
+         
+    <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.pool" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/pool' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-trophy orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Affiliates</b>
+            </a>
+        </li>
+    </ul>     
+
+
+                     
+  
+    <ul class='nav navbar-nav navbar-right'  ng-if="admin.administrator.access.pool" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/agents' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-flag orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Agents</b>
+            </a>
+        </li>
+    </ul>     
+
+
+
+    
+  
+       
+
+
+    
+  
+    <ul class='nav navbar-nav navbar-right'  ng-if="admin.administrator.access.cryptocurrency" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/crypto' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-wallet orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Wallets</b>
+            </a>
+        </li>
+    </ul>   
+    
+    
+    <ul class='nav navbar-nav navbar-right'  ng-if="admin.administrator.access.assets" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/assets' style="color:rgb(20, 20, 20) !important;">
+                <i class="fab fa-cc-discover orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Gift Cards</b>
+            </a>
+        </li>
+    </ul>     
+
+   
+
+
+
+     
+                     
+      <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.peers" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/peers' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-money-bill orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Payments</b>
+                <span ng-if="(peers | filter:{status:1}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(peers | filter:{status:1}).length || 0}}</span>
+            </a>
+        </li>
+    </ul>     
+    
+    <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.pool" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/requests' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-envelope-open-text orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Requests</b>
+                <span ng-if="(customers | filter:{on_approval:true}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(customers | filter:{on_approval:true}).length || 0}}</span>
+            </a>
+        </li>
+    </ul>     
+
+
+      <ul class='nav navbar-nav navbar-right'  ng-if="admin.administrator.access.roles" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/team' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-hands-helping orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Roles</b>
+            </a>
+        </li>
+    </ul>     
+
+    <ul class='nav navbar-nav navbar-right'  ng-if="admin.administrator.access.roles" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/backup' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-database orange"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Backups</b>
+            </a>
+        </li>
+    </ul>     
+
+
+<Br><br>
+      <ul class='nav navbar-nav navbar-right' style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <div class="btn btn-sm btn-danger" data-toggle="modal" data-target="#logout" style="margin: auto !important;display:inline !important;direction: ltr !important;float: auto !important;">
+                <span>Logout</span>
+            </div>    
+        </li>
+    </ul>    
+    
+  <br><br>
+  
+  </div>
+    
+    </div>   
+    
+    
+    
+    
+    
+    

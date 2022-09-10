@@ -1,0 +1,81 @@
+
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+<div class="col col-md-10">
+          <div class="box">
+
+
+                <section class="content-header">
+                  <Br>
+                <h2 class="black">
+                Requests
+                </h2>
+                </section>
+      
+
+
+
+
+
+                <div class="padding" style="padding:10px !important;overflow:scroll !important;">
+
+                    <div class="row">
+                        <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+                          <input type="text" ng-model="srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(0, 0, 0);" placeholder="Search for request">
+                        </div>
+                    </div>
+                    <br>
+
+                          <div style="overflow-y: scroll !important;height: 200px !important;" ng-if="(customers | filter:{on_approval:true}).length > 0">
+                          <table class="table table-hover">
+                            <tbody>
+                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);height: 30px !important;">
+                                    <th>Obic ID</th>
+                                    <th>Name</th>
+                                    <th>Identity</th>
+                                    <th>Purpose</th>
+                                    <th></th>
+                                </tr>
+                                <tr ng-click="select_request(request)" ng-repeat="request in (customers | filter:{on_approval:true}) | filter:srch" style="cursor:pointer;" data-toggle="modal" data-target="#viewrequest">
+                                    <td>{{request.o_id || '...'}}</td>
+                                    <td>{{request.full_name || (request.first_name+' '+request.last_name) | capitalize}}</td>
+                                    <td>{{request.document_type || 'ID card'}}</td>
+                                    <td>Affiliate Programme</td>
+                                    <td><b class="oran">Pending...</b></td>
+                                </tr>
+                            </tbody>
+                          </table>  
+                          </div>
+
+
+                          <div class="text-center padding" ng-if="!(customers | filter:{on_approval:true}) || (customers | filter:{on_approval:true}).length < 1">
+                           <br><br><br> <b>You Haven't Had Any Affiliate requests Yet</b>
+                          </div>
+                  
+              </div>
+
+
+
+
+        </div>
+      </div>
+   
+
+
+
+
+
+
+
+
+  
+  
+<div ng-include src="'templates/admin/popups/request.html'"></div>
+
+
+
+
+<div ng-include src="'templates/admin/popups/logout.html'"></div>
+ 

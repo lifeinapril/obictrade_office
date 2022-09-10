@@ -1,0 +1,150 @@
+<div id="fh5co-page">
+  
+         
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+    
+    <div class="col col-md-10 padding">
+        <div class="content">
+            
+      
+      
+          <section>
+            <br><br>
+              <b style="color: black !important;">
+              Settings
+              </b><br>
+              <small>Set your profile preference and account details</small>
+              <br><br>
+      
+      
+      
+                
+      
+      
+                <div class="col-md-12">
+                  <div class="nav-tabs-custom" style="background-color:rgb(240, 240, 240) !important;">
+                    <ul class="nav nav-tabs"> 
+                       <li class="active"><a data-target="#settings" data-toggle="tab">Edit Account</a></li>
+                       <li class=""><a data-target="#password_change" data-toggle="tab">Security</a></li>
+                    </ul>
+                    <div class="tab-content" style="background-color:rgb(240, 240, 240) !important;height: auto !important;">
+                      
+                    
+                      <div class="tab-pane" style="background-color:rgba(255, 255, 255, 0.993) !important" id="password_change">
+                          <form ng-submit="change_password(admin)" class="content center-box login-box box">
+      
+      
+                            <div class="form-group">
+                              <label>Password</label>
+          
+                              <div class="col-md-12">
+                                <input type="password" ng-model="admin.old_password" placeholder="Current Password">
+                              </div>
+                            </div>            
+                              <br>
+                              <hr>
+                              <div class="text-center"><i>Please provide your new password to change your current password</i></div>
+                              <div class="form-group">
+                                  <label>New Password</label>
+                                  <div class="col-md-12">
+                                    <input type="password" ng-model="admin.new_password" placeholder="New Password">
+                                  </div>
+                              </div>
+                          
+                              <div class="form-group">
+                                  <label>Retype-Password</label>
+                                  <div class="col-md-12">
+                                    <input type="password" ng-model="admin.retype_password" placeholder="Retype Password">
+                                  </div>
+                              </div>
+      
+      
+                                  
+                                   <div class="form-group">
+                                     <div class="col-md-12">
+                                        <br>
+                                        <br>
+                                      <button type="submit" ng-show="!show_loader" ng-disabled="!admin.new_password || (admin.new_password!=admin.retype_password)" class="btn btn-blue">Update</button>
+                                      <b ng-show="show_loader">Please Wait...</b> </div>
+                                   </div>
+                            </form>    
+                      </div>
+      
+      
+      
+        
+                      <div class="tab-pane active" id="settings" style="margin-top:-10px; padding:10px;background-color:rgb(255, 255, 255) !important;">
+                       
+
+
+                        <form ng-submit="update_profile(admin)" style="height: auto !;float: left !important;">
+                        <div  class="content center-box login-box box">
+                                <br><br>
+                          <div class="form-group">
+                            <label style="color: black !important;">First Name</label>
+                              <input type="text" ng-model="admin.first_name" placeholder="First Name" required>
+                          </div>
+      <br>
+                          <div class="form-group">
+                            <label style="color: black !important;">Last Name</label>
+                              <input type="text" ng-model="admin.last_name" placeholder="Last Name" required>
+                          </div>
+      <br>
+                          <div class="form-group">
+                              <label style="color: black !important;">Email</label>
+                                <input type="text" ng-model="admin.email" placeholder="Email" required>
+                          </div>
+      
+      <br>
+                            <div class="form-group">
+                                <label style="color: black !important;">Phone</label>
+                                  <input type="tel" ng-model="admin.phone" placeholder="Phone">
+                              </div>
+                         
+                              <br>
+                              <br>
+                              
+                               <div class="form-group">
+                                       <br>
+                                 <div class="col-md-12">
+                                  <button type="submit" ng-show="!show_loader" class="btn btn-blue">Save</button>
+                                  <b ng-show="show_loader">Please Wait...</b></div>
+                               </div>
+                        </div>
+
+                        </form>
+                      </div>
+      
+      
+      
+      
+      
+      
+                    </div>
+      
+                  </div>
+                </div>
+                
+              
+        
+          </section>
+      <hr>
+        
+        </div>
+      </div>
+      </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+
+

@@ -1,0 +1,197 @@
+<div class="nav-tabs-custom no-border" style="min-height: 580px !important;">
+    <ul class="nav nav-tabs row no-border"> 
+        <li class="active"><a data-target="#activity" data-toggle="tab">Activity</a></li>
+        <li class=""><a data-target="#access" data-toggle="tab">Access</a></li>
+        <li class=""><a data-target="#peer" data-toggle="tab">Peering</a></li>
+    </ul>
+    <div class="tab-content" style="background-color:rgba(19, 17, 17, 0) !important">
+    
+                                  
+
+                                    <div class="tab-pane active" style="background-color:rgba(199, 41, 41, 0.014) !important" id="activity">
+                                    
+                                      <div class="row">
+                                        <div class="input-group-sm col col-md-12 col-sm-12 col-xs-12">
+                                          <input type="text" ng-model="log_srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(0, 0, 0);" placeholder="Search activity">
+                                        </div>
+                                        </div>
+                                        <br>
+                                        <div class="timeline" style="overflow-y: scroll !important;height: 700px !important;">
+      
+
+                                            <div ng-include src="'templates/admin/components/log.html'" ng-repeat="log in logs | filter:selected_admin._id | orderBy:'-date_created' | filter:log_srch | limitTo:70">
+                                            </div>
+                                  
+                                        </div>
+                                
+                                        <div ng-if="!logs || (logs  | filter:selected_admin._id).length < 1" class="text-center padding">
+                                            <br><br><br>
+                                                <b class="black">No logs</b>
+                                            <br>
+                                        </div>
+
+                                    </div>
+
+
+                                 
+                                    <div class="tab-pane" style="overflow-y: scroll !important;height: 700px !important;background-color:rgba(199, 41, 41, 0.014) !important" id="access">
+                                        <div class="form-group" ng-if="selected_admin._id!=admin.administrator._id">
+                                            <b style="color: #000;">Access Level</b>
+                                            <div class="col-md-12">
+                                                <select title="link" ng-change="change_role(selected_admin.role)" ng-model="selected_admin.role" ng-disabled="!admin.administrator.access.create_admin">
+                                                <option value="4">Support</option>
+                                                <option value="3">Accounting</option>
+                                                <option value="2">Sales</option>
+                                                <option value="1" selected>Manager</option>
+                                                <option value="0" selected>Owner</option>
+                                                </select>
+                                            </div>
+                                            <br/>
+                                        </div>
+                                        <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
+                                            <tbody>
+                                                <tr style="color:rgb(242, 242, 242);background-color: rgb(53, 53, 53);border: 1px solid rgb(247, 244, 244);">
+                                                  <th>
+                                                    Access to
+                                                  </th>
+                                                   <th>Status</th>
+                                                </tr>
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Customer details</td>
+                                                    <td>{{selected_admin.access.customers}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Create digital assets</td>
+                                                    <td>{{selected_admin.access.create_asset}}</td>
+                                                </tr>
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Access to digital assets</td>
+                                                    <td>{{selected_admin.access.assets}}</td>
+                                                </tr>
+
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Delete Assets</td>
+                                                    <td>{{selected_admin.access.delete_asset}}</td>
+                                                </tr>
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Terminate customer profile</td>
+                                                    <td>{{selected_admin.access.terminate_account}}</td>
+                                                </tr>
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Peer an administrator</td>
+                                                    <td>{{selected_admin.access.create_peer}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Affiliate/Agents details</td>
+                                                    <td>{{selected_admin.access.pool}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Change wallet addresses</td>
+                                                    <td>{{selected_admin.access.edit_wallet}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Grant/Deny payments</td>
+                                                    <td>{{selected_admin.access.grant_peer}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Change rates</td>
+                                                    <td>{{selected_admin.access.change_rates}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Create new administrator</td>
+                                                    <td>{{selected_admin.access.create_admin}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Wallet details</td>
+                                                    <td>{{selected_admin.access.cryptocurrency}}</td>
+                                                </tr>
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Sales records</td>
+                                                    <td>{{selected_admin.access.transactions}}</td>
+                                                </tr>
+
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Confirm transactions</td>
+                                                    <td>{{selected_admin.access.grant_transactions}}</td>
+                                                </tr>
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Peer/Payment records</td>
+                                                    <td>{{selected_admin.access.peers}}</td>
+                                                </tr>
+
+
+                                                <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
+                                                    <td>Roles & admin details</td>
+                                                    <td>{{selected_admin.access.roles}}</td>
+                                                </tr>
+
+                                            </tbody>
+                                     </table>
+
+                                    </div>
+
+
+                                    <div class="tab-pane" style="overflow-y: scroll !important;height: 700px !important;background-color:rgba(199, 41, 41, 0.014) !important;color:black !important;" id="peer">
+                                                <div ng-if="selected_admin.peer=='no'">
+                                                    <e>This account is not peered</e>
+                                                </div>
+
+                                                <div class="form-group" ng-if="admin.administrator.access.create_peer && (admin.administrator._id!=selected_admin._id)">
+                                                        <label>Peering</label>
+                                                        <div class="col-md-12">
+                                                            <select title="link" ng-model="selected_admin.peer">
+                                                            <option value="no" selected>None</option>
+                                                            <option value="yes">Peer account</option>
+                                                        </select>
+                                                        </div>
+                                                </div>
+                                                    <br><Br>
+                                                       
+                                                        <div class="box" ng-if="selected_admin.peer=='yes'">
+                                                            <div class="padding">
+                                                                <b>Peer ID:</b>{{selected_admin.peer_id}}
+                                                            </div>
+                                                                            <div class="list-group" ng-if="selected_admin.account.bank_account">
+                                                                                <b class="black ">{{selected_admin.account.bank_account.bank.Name}}</b><br>
+                                                                                <v class="black ">{{selected_admin.account.bank_account.account_number}}</v>
+                                                                                <h5 class="black ">{{selected_admin.account.bank_account.account_name}}</h5>
+                                                                            </div>
+                                                                            <ul class="list-group">
+                                                                                <li class="list-group-item"><b>Total Received</b><br> <v class="green">NGN {{selected_admin.total_received || 0 | number:2}}</v></li>
+                                                                                <li class="list-group-item"><b>Total Sent</b><Br> <v class="green"> NGN {{selected_admin.total_sent || 0 | number:2}}</v></li>
+                                                                                <li class="list-group-item"><b>Balance</b><Br> <v ng-class="(selected_admin.total_received - selected_admin.total_sent) < 0 ? 'red':'green'"> NGN {{(selected_admin.total_received - selected_admin.total_sent) || 0 | number:2}}</v></li>
+                                                                            </ul>   
+                                                                    
+                                                            </div>
+                      
+                                    </div>
+
+    
+    
+    </div>
+</div>
+    
+    
+    
+    
+    

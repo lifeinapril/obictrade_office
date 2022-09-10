@@ -1,0 +1,120 @@
+
+      
+  
+  <div class="modal modal-default slide in" id="openwallet">
+    <div class="modal-dialog modal-lg">
+      <form class="modal-content" ng-submit="update_coin(coin)">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title text-center" style="color:#333;"><b>Trade Settings</b></h4>
+        </div>
+        <div class="modal-body">
+        
+
+          <div class="text-center">
+            <img title="link" ng-if="coin.icon" src="{{media + coin.icon +'?token='+token}}" height="50" />
+            <br><Br>
+            <h4 style="color: rgb(53, 52, 52) !important;"><b>{{coin.coin || '...' | uppercase}}</b>  account</h4>
+          </div>
+  
+
+<div class="row">
+      <div class="col col-md-6 col-sm-12">
+                  <br/>
+        <div class="info-box" style="background-color: rgb(235, 231, 231) !important;padding:20px;">    
+          <small style="color:rgb(15, 15, 15) !important;">{{coin.coin || '...' | uppercase}} Balance</small>
+          <span class="info-box-number" style="color:rgb(248, 172, 31) !important;">{{coin.balance || 0 | number}} {{coin.coin || '...' | uppercase}}</span>
+          <small class="info-box-number" style="color:rgb(43, 116, 9) !important;">${{(coin.balance * coin.selling.usd) || 0 | number:2}}</small>
+          <br/>
+          <a data-toggle="modal" data-dismiss="modal" data-target="#wallet_transactions" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">History</a>    
+          &nbsp;&nbsp;
+          <a data-toggle="modal" data-dismiss="modal" data-target="#wallet_send" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">Send</a>    
+        </div>
+        
+
+        <div class="padding">
+          <h5 style="color:#333;">{{coin.coin || '...' | uppercase}} Sales Address</h5>
+          <h6 style="color: rgb(53, 52, 52) !important;"><b>{{coin.main_address || '...'}}</b></h6>
+        </div>
+      
+        <hr>
+        <div class="row padding">
+                
+          <b class="pull-left"><span class=" oran fas fa-caret-up"></span> Selling At</b><br>                
+          <div class="pull-right"> 
+            <small class="pull-right" style="font-size: 14px !important;">&nbsp;&nbsp;&nbsp;<b ng-class="coin.allow_buy ? 'green':'red'">{{(coin.buying.usd*coin.buy_rates) || 0 | currency:'₦':0}}</b> / {{coin.coin}}</small>
+            <br>
+                <div class="form-group  pull-right"> 
+                    <b  class="pull-right green">/$</b>
+                
+                    <input  ng-disabled="!admin.administrator.access.change_rates" class="pull-right" ng-model="coin.buy_rates" type="number" style="width:100px !important;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;font-size:24px !important;text-align: right !important;" placeholder="390" required>
+              
+                    <b class="pull-right green">₦</b> 
+                </div>   
+          </div>
+          <br>
+          <button ng-if="!coin.allow_buy" style="background:rgb(0, 199, 0);color:#fff;" class="btn btn-sm btn-small btn-outline" ng-click="start_buy()">Start selling</button>
+          <button ng-if="coin.allow_buy" style="background:rgb(199, 23, 0);color:#fff;" class="btn btn-sm btn-small btn-outline" ng-click="stop_buy()">Stop selling</button>
+  
+        
+        </div>
+          
+          
+
+      </div>
+      <div class="col col-md-6 col-sm-12" style="border-left: 1px solid red !important;padding-top: 15px !important;">
+
+     
+        <div class="padding">
+          <h5 style="color:#333;">{{coin.coin || '...' | uppercase}} Deposit Address</h5>
+          <input ng-disabled="!admin.administrator.access.edit_wallet || coin.allow_sell" ng-model="coin.address" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Wallet Address" required>
+          <br>
+          <br>
+          <h5 style="color:#333;">Transaction Fee ({{coin.coin}})</h5>
+          <input ng-disabled="!admin.administrator.access.change_rates" ng-model="coin.fee" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="0.00000000" required>
+          <small class="info-box-number" style="color:rgb(43, 116, 9) !important;">${{(coin.fee * coin.selling.usd) || 0 | number:2}}</small>
+      </div>
+      
+      <br>
+      <hr>
+        <div class="row padding">
+                
+          <b class="pull-left"><span class=" oran fas fa-caret-down"></span> Buying At</b><br>
+            <div class="pull-right"> 
+              <small class="pull-right" style="font-size: 14px !important;">
+                &nbsp;&nbsp;&nbsp;<b ng-class="coin.allow_sell ? 'green':'red'">{{(coin.selling.usd*coin.sell_rates) || 0 | currency:'₦':0}}</b> / {{coin.coin}}
+              </small>
+              <br>
+                <div class="form-group  pull-right"> 
+                    <b  class="pull-right green">/$</b>
+                
+                    <input  ng-disabled="!admin.administrator.access.change_rates" class="pull-right" ng-model="coin.sell_rates" type="number" style="width:100px !important;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;font-size:24px !important;text-align: right !important;" placeholder="390" required>
+              
+                    <b class="pull-right green">₦</b> 
+                </div>   
+          </div>
+          <br>
+          <button ng-if="!coin.allow_sell" style="background:rgb(0, 199, 0);color:#fff;" class="btn btn-sm btn-small btn-outline" ng-disabled="!coin.address" ng-click="start_sell()">Start buying</button>
+          <button ng-if="coin.allow_sell" style="background:rgb(199, 23, 0);color:#fff;" class="btn btn-sm btn-small btn-outline" ng-click="stop_sell()">Stop buying</button>
+  
+          <br>
+        
+        </div>
+          
+          
+      </div>
+</div>
+           
+
+
+        </div>
+        <div class="modal-footer text-center center">
+          <button type="submit" style="background:rgb(199, 96, 0);color:#fff;" class="btn btn-outline">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,70 @@
+
+<div id="container">
+            
+          <div class="col-sm-12 col-xs-12 col-md-12">
+           <div class="box login-box  center-box">
+            <br>
+            <b style="height:auto !important;color:#666;font-size:13px;line-height:15px;">Register administrator</b>
+           
+          <h6 class="text-danger text-center">{{error}}</h6>
+          <hr>
+                  <form class="form-horizontal" ng-submit="register(form)">
+
+                  <div class="form-group">
+                  <label class="control-label col-sm-2" for="fname"><b>First name</b></label>
+                  <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="form.first_name" name="first_name" id="first_name" placeholder="Enter first name">
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                  <label class="control-label col-sm-2" for="lname"><b>Last name </b></label>
+                  <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="form.last_name" name="last_name" id="last_name" placeholder="Enter last name">
+                  </div>
+                  </div>
+
+
+                  <div class="form-group">
+                  <label class="control-label col-sm-2" for="email"><b>Email </b></label>
+                  <div class="col-sm-10">
+                  <input type="email" class="form-control" autocomplete="false" ng-model="form.email" name="email" id="email" placeholder="Enter email">
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Access Level</label>
+                    <div class="col-md-12">
+                      <select title="options" ng-model="form.access_level">
+                        <option value="2" selected>Employee</option>
+                        <option value="1">Owner</option>
+                    </select>
+                    </div>
+                    </div>
+
+
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd"><b>Password</b> </label>
+                    <div class="col-sm-10"> 
+                    <input type="password" class="form-control"  ng-model="form.password" name="password" placeholder="Enter password">
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd"><b>Retype Password</b> </label>
+                    <div class="col-sm-10"> 
+                    <input type="password" class="form-control"  ng-model="form.rpassword" name="password" placeholder="Retype password">
+                    </div>
+                    </div>
+                      <br><br><br>
+                  <div class="form-group"> 
+                  <div class="col-sm-12 col-md-12">
+                  <button  ng-disabled="!form.first_name || !form.last_name || !form.email || !form.password || (form.password!=form.rpassword)" type="submit" class="btn btn-block btn-lg btn-blue btn-long btn-primary">Register</button>
+                <br><br>  
+                </div>
+                  </div>
+                 
+                  </form>
+          </div>
+        </div>
+</div>
+

@@ -1,0 +1,96 @@
+ 
+        
+    <div ng-include src="'templates/admin/include/banner.html'"></div>
+ 
+    <div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+    
+    
+    <div class="col col-md-10">
+      <div class="content grade">
+
+        <section class="content-header">
+          <br>
+          <h4 class="dark">Gift Cards ({{assets.length || 0}})</h4>
+        </section>
+
+<div class="box padding" style="padding:10px !important;overflow:scroll !important;">
+
+
+
+          <div class="row">
+            <div class="input-group-sm col col-md-7">
+              <input type="text" ng-model="srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search for assets...">
+            </div>
+            <button  ng-if="admin.administrator.access.create_asset" data-toggle="modal" data-target="#createasset" type="button"  class="btn btn-sm btn-primary pull-right" style="background-color: rgb(20, 19, 19);margin: 6px !important;">Add Gift Card</button>
+          </div>
+
+<br>
+
+        <div class="col-md-3 col-sm-12 col-xs-12" ng-repeat="mm in assets | filter:srch | orderBy:'-_id'" style="color:#333; height: 500px !important;">
+        <div class="box box-widget widget-user"style="border:none !important;">
+            <div style="border:none !important;width:100% !important;height: 150px !important;background-size: cover !important;" ng-style="{'background-image':'url('+media+mm.photo +'?token='+token+')'}">
+            </div>
+          <div class="box-footer bg-white" style="border:none !important">
+            <br>
+              <b style="font-size: 18px !important;">{{mm.name | capitalize}}</b><br>
+              <v class="orange">{{mm.type | capitalize}}</v><br>
+              <b>{{mm.currencies[0].sell || 0}} / {{mm.currencies[0].symbol || '$'}}</b><br>
+            <br>
+            <h5 class="dark black"><small>Registered on</small> {{mm.date_created | date}}</h5>
+           
+            <div class="row padding text-center">
+             <a data-toggle="modal" data-target="#editasset"  ng-click="select_asset(mm)" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">Edit Asset</a>
+            </div>    
+            </div>
+          </div>
+        </div>
+
+
+
+
+<div ng-show="!assets || assets.length < 1" class="text-center padding"><br><br><br>
+  <b>No digital asset has been created</b>
+</div>
+
+
+</div>
+
+
+</div>
+
+        
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div ng-include src="'templates/admin/popups/create_asset.html'"></div>
+ 
+
+      <div ng-include src="'templates/admin/popups/edit_asset.html'"></div>
+
+
+
+
+  <div ng-include src="'templates/admin/popups/logout.html'"></div>
+ 
+ 

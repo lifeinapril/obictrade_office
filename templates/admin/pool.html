@@ -1,0 +1,142 @@
+
+<div id="fh5co-page">
+  <div id="">
+
+
+<div ng-include src="'templates/admin/include/banner.html'"></div>
+
+<div class="col col-md-2" ng-include src="'templates/admin/include/side.html'"></div>
+
+
+
+<div class="col col-md-7">
+  <div class="box padding">
+      
+
+      <section class="content-header">
+        <br><Br>
+
+        <div class="pull-right" style="float: right !important;">
+          <button data-toggle="modal" data-target="#verify" class="btn btn-sm btn-green pull-right">Verify</button>
+          </div>  
+          <h2 class="black">Affiliates</h2>
+          <small class="black dark" style="color: black !important;">({{affiliates.length || 0}} Traders)</small>
+      </section>
+
+      <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7" style="padding-top:10px !important;">
+        <input type="text" ng-model="srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search for affiliates...">
+      </div>
+      <br>
+      <br>
+      <table class="table">
+        <tbody style="border:none !important;">
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Trades</th>
+        <th>Connections</th>
+      </tr>
+
+      <tr  ng-repeat="user in affiliates | orderBy:'-connections' | filter:srch" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewcustomer" ng-click="select_customer(user)">
+        <td>{{$index + 1}}</td>
+        <td>{{user.full_name || (user.first_name+' '+user.last_name) | capitalize}}</td>
+        <td>{{(transactions | filter:tradeFilter(user.o_id)).length || 0}}</td>
+        <td><b class="orange">{{user.connections.length || 0 }}</b></td>
+      </tr>
+      </tbody>
+    </table>
+  
+
+<div ng-show="!affiliates || affiliates.length < 1" class="text-center padding"><br><br><br>
+<b>No affiliates on obictrade</b>
+</div>
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+<div class="col col-md-3 col-sm-12 rightside" style="border-left: 1px solid red !important;">
+<br><br>
+
+    <div class="col-lg-12 col-xs-12 col-sm-12">
+      <div class="small-box bg-purple">
+        <div class="inner"> 
+          <p>Market Rate</p>
+          <h3 class="white">{{
+            (avg_rate_pool(bitcoin) + avg_rate_pool(ethereum) + avg_rate_pool(usdt))/3
+            
+            || 0 | currency}}/$</h3>
+        </div>
+        <div class="icon">
+          <i class="fa fa-coins white"></i>
+        </div>
+       </div>
+    </div>
+
+    <div class="box padding" style="width: 100% !important; float: left !important;">
+      <div class="text-right" style="float: right !important;">    
+        <small style="color:rgb(44, 29, 2) !important;">{{total_coin_pool(bitcoin) || 0 | number:8}} BTC</small><br>
+        <small style="color:rgb(43, 116, 9) !important;">${{(total_coin_pool(bitcoin) * bitcoin.selling.usd) || 0 | number:2}}</small><br>
+        <a data-toggle="modal" data-target="#rates"  ng-click="open_rates(bitcoin)" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">BTC Active Traders</a>
+      </div>  
+          <img  title="link" ng-if="!bitcoin.icon" src="images/coins/btc.png" height="50" />
+          <img  title="link" ng-if="bitcoin.icon" src="{{media + bitcoin.icon +'?token='+token}}" height="50" />
+    </div>
+
+
+    <br>
+
+
+    <div class="box padding" style="width: 100% !important; float: left !important;">
+      <div class="text-right" style="float: right !important;">    
+        <small style="color:rgb(49, 33, 3) !important;">{{total_coin_pool(ethereum) || 0 | number:8}} ETH</small><br>
+        <small style="color:rgb(43, 116, 9) !important;">${{(total_coin_pool(ethereum) * ethereum.selling.usd) || 0 | number:2}}</small><br>
+        <a data-toggle="modal" data-target="#rates"  ng-click="open_rates(ethereum)" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">ETH Active Traders</a>
+      </div>  
+          <img  title="link" ng-if="!ethereum.icon" src="images/coins/eth.png" height="50" />
+          <img  title="link" ng-if="ethereum.icon" src="{{media + ethereum.icon +'?token='+token}}" height="50" />
+    </div>
+
+    <br>
+
+
+    <div class="box padding" style="width: 100% !important; float: left !important;">
+      <div class="text-right" style="float: right !important;">    
+        <small style="color:rgb(49, 33, 2) !important;">{{total_coin_pool(usdt) || 0 | number:8}} USDT</small><br>
+        <small style="color:rgb(43, 116, 9) !important;">${{(total_coin_pool(usdt) * usdt.selling.usd) || 0 | number:2}}</small><br>
+        <a data-toggle="modal" data-target="#rates"  ng-click="open_rates(usdt)" style="text-decoration: underline !important; color: cadetblue !important;cursor: pointer;">USDT Active Traders</a>
+      </div>  
+          <img  title="link" ng-if="!usdt.icon" src="images/coins/usdt.png" height="50" />
+          <img title="link" ng-if="usdt.icon" src="{{media + usdt.icon +'?token='+token}}" height="50" />
+    </div>
+
+
+
+  </div>
+
+</div>
+</div>
+
+
+<div ng-include src="'templates/admin/popups/verify_user.html'"></div>
+
+
+<div ng-include src="'templates/admin/popups/view_customer.html'"></div>
+
+
+
+
+<div ng-include src="'templates/admin/popups/open_crypto.html'"></div>
+
+
+<div ng-include src="'templates/admin/popups/logout.html'"></div>
+
+
+<div ng-include src="'templates/admin/popups/rates.html'"></div>
+

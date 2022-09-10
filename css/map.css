@@ -1,0 +1,43 @@
+.custom-marker{
+    background: none !important;
+    box-shadow: none !important;
+  }
+  .mark {
+    width:auto !important;
+    min-width: 90px !important;
+    height: 39px !important;
+    padding: 3px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-color:rgb(255, 136, 0);
+    background-blend-mode:soft-light !important;
+    box-shadow: 0px 2px 8px 0px #00000028;
+    transition: all ease-in 0.8s;
+    color:rgb(255, 255, 255) !important;
+    border:none;
+    font-size: 14px !important;
+  }
+  .mark:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-radius: 500px transparent;
+      border-top-color: rgb(255, 136, 0);
+      border-bottom: 0;
+      border-left: 0;
+      margin-left: -10px;
+      margin-bottom: -20px;
+  }
+  .mark .details{
+    padding: 2px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+    padding-top: 8px !important;
+    float: left;
+  }
+  
+

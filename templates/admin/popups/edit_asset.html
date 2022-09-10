@@ -1,0 +1,129 @@
+
+      
+  
+  <div class="modal modal-default fade in" id="editasset">
+    <div class="modal-dialog modal-md">
+      <form class="modal-content" ng-submit="update_asset(selected_asset)">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title text-center" style="color:#333;"><b>Edit Asset</b></h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <!-- <div ng-if="selected_asset.photo" style="border:none !important;width:100% !important;height: 150px !important;background-size: cover !important;" ng-style="{'background-image':'url('+media+selected_asset.photo+')'}">
+            </div> -->
+                  <div class="col-md-12  col-xs-12 col-sm-12">
+                    <div class="form-group">
+                      <small style="color:#333;">Asset Name</small>
+                      <b>{{selected_asset.name | capitalize}}</b>
+                    </div>
+                  </div>
+          
+<br>
+              
+            <div class="col-md-12  col-xs-12 col-sm-12">
+              <small>Asset Type</small>
+                  <b class="orange">{{selected_asset.type | capitalize}}</b>
+                  <br>
+            </div>
+
+            <div class="col-md-12 col-xs-12 col-sm-12" ng-if="selected_asset.type=='cryptocurrency'">
+              <br><br>
+              <div class="col-md-6  col-xs-12 col-sm-12"> 
+                <div class="form-group">
+                  <b style="color:#333;">Asset Wallet Address</b>
+                  <input ng-model="selected_asset.address" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Wallet Address" required>
+                </div>   
+              </div>
+          
+              <div class="col-md-6  col-xs-12 col-sm-12">  
+                   <qrcode style="float: right !important;" data="{{selected_asset.address || '...'}}" size="50"></qrcode>
+              </div>
+
+          </div>
+
+
+        
+
+        <div class="col-md-12 col-xs-12 col-sm-12" style="float: left !important;width: 100% !important;">
+          <br>
+          <b>Currencies</b>
+          <div class="list-group-item" style="margin-bottom: 15px !important;padding-bottom: 10px !important;" ng-repeat="curr in selected_asset.currencies">
+          <a ng-if="$index > 0" class="pull-right red" ng-click="remove_currency(curr)">Remove</a>
+          <br>
+          <div class="row">
+            <div class="col-sm-3 col-xs-3 col-md-3">
+            <b>Currency</b><br>
+            <input ng-model="curr.name" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="e.g USD" required>
+          </div>
+          <div class="col-sm-3 col-xs-3 col-md-3">
+            <b>Symbol</b><br>
+            <input ng-model="curr.symbol" type="text" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="e.g $" required>
+         </div>
+           <div class="col-sm-3 col-xs-3 col-md-3">
+            <b>Buying at</b><br>
+            <input ng-model="curr.sell" type="number" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Buying at" required>
+          </div>
+            <div class="col-sm-3 col-xs-3 col-md-3">
+              <b>Selling at</b><br>
+              <input ng-model="curr.buy" type="number" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Selling at" required>  
+            </div>
+           </div>
+           </div>
+          <br><br>
+          <a class="btn btn-link pull-right" style="cursor:pointer !important;margin: auto !important;" ng-click="add_currency('','')">Add Currency +</a>
+          <br><br>
+
+          <br>
+        </div>
+
+
+
+        
+       
+        <div class="col-md-12 col-xs-12 col-sm-12" style="float: left !important;width: 100% !important;" ng-if="selected_asset.type=='gift card'">
+          <b>Card Types</b>
+          <div class="list-group-item" style="margin-bottom: 15px !important;" ng-repeat="card in selected_asset.card_types">
+          <a class="pull-right red" ng-click="remove_card_type(card)">Remove</a>
+          <v>{{card}}</v>
+           </div>
+          <br>
+           <div class="pull-right">
+            <select title="link" name="card_type" ng-options="card_type as card_type for card_type in card_types" ng-model="card_type" style="padding: 5px !important;border: 1px solid rgb(58, 57, 57) !important;">
+            </select>
+            <a class="btn btn-link" style="cursor:pointer !important;margin: auto !important;" ng-click="add_card_type(card_type)">Add Card Type +</a>
+           </div>
+          <br><br>
+
+          <br>
+        </div>
+
+
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="form-group">
+                <input ng-model="selected_asset.description" type="text" class="form-control" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Asset Description" required>
+              </div>
+            </div>
+
+
+<div class="card text-center padding" ng-if="admin.administrator.access.delete_asset">
+    <br>
+    <a ng-click="delete_asset(selected_asset)" class="btn btn-outline" style="background: none;color:red;text-decoration:underline;">Delete Asset</a>
+    <br>
+</div>
+
+
+
+
+</div>
+</div>
+        <div class="modal-footer text-center center">
+          <button type="submit" style="background:rgb(199, 96, 0);color:#fff;" class="btn btn-outline">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,23 @@
+  
+  
+    <div class="col-md-12" style="border-left: 1px solid red !important;">
+        <h5 class="red">RECENT ACTIVITIES</h5>
+        <div class="row">
+            <div class="input-group-sm col col-md-12 col-sm-12 col-xs-12">
+              <input type="text" ng-model="log_srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search logs...">
+            </div>
+            <br> <br>
+          </div>
+        <div class="timeline">
+        
+                <div ng-include src="'templates/admin/components/log.html'" ng-repeat="log in logs | orderBy:'-date_created' | filter:log_srch | limitTo:15">
+                  </div>
+        
+        </div>
+      
+          <div ng-if="!logs || logs.length < 1" class="text-center padding">
+              <br><br><br>
+                  <b>no logs</b>
+              <br>
+          </div>
+      </div>

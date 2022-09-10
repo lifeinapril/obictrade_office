@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/office/">
+    <title>Obic Office</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/obic.png">
+    <link rel="stylesheet" href="lib/font-a/css/font-awesome.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/flexslider.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/toastr.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/font.css">
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="js/toastr.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="js/ngStorage.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap.min.js"> </script>
+    <script type="text/javascript" src="lib/fontawesome/js/all.js"></script>
+    <script src="js/ng-file-upload-shim.min.js"></script>
+    <script src="js/ng-file-upload.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+
+  <script src="js/Chart.min.js"></script>
+  <script src="js/angular-chart.min.js"></script>   
+   
+    <script src="engine/app.js"></script>
+    <script src="engine/API.js"></script>
+    <script src="engine/route.js"></script>
+    <script src="engine/core.js"></script>
+    <script src="engine/filters.js"></script>
+
+
+    <script src="controller/Auth.js"></script>
+    <script src="controller/admin.js"></script>
+ 
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+    </script>
+
+</head>
+
+<body class="grass" ng-app="office">
+    <div ng-show="show_loader" class="face_loader"></div> 
+    <ng-view></ng-view>
+</body>
+
+</html>
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+
+      
+  
+  <div class="modal fade bd-example-modal-lg" id="traders" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="media">
+                        <div class="media-body">
+                         
+               
+                <div class="col col-md-12">
+                  <img ng-if="coin.icon" src="{{media + coin.icon +'?token='+token}}" height="25" />
+                  <b>{{coin.coin}} Addresses</b>
+                  <br>
+                  <br>
+                  <div class="row">
+                    <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
+                      <input type="text" ng-model="srch" class="form-control" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(253, 253, 253);" placeholder="Search Trades...">
+                    </div>
+                    <br>
+                  </div>
+                  <br>
+                    <table class="table table-hover">
+                        <tbody>
+                          <tr  ng-if="coin.customers.length > 0" style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);height: 30px !important;">
+                           <!-- <th>ObicID</th> -->
+                           <th>Name</th>
+                           <th>Address</th>
+                           <th>Balance</th>
+                    </tr>
+          
+                    <tr ng-repeat="p in coin.customers  | filter: greaterThan('balance', 0) | filter:srch | orderBy:'-balance'" style="cursor:pointer;"  data-toggle="modal" data-dismiss="modal" data-target="#viewcustomer" ng-click="select_customer(p)">
+                       <!-- <td>{{p.o_id || '-'}}</td> -->
+                      <td>
+                        {{p.full_name || p.first_name +' '+ p.last_name | capitalize}}<br>
+                        <small class="oran" ng-if="p.user_name">@{{p.user_name}}</small>
+                        &nbsp;<span ng-if="p.affiliate" class="oran fa fa-flag"></span>
+                    </td>
+                    <td>
+                        {{p.address}}
+                    </td>
+                      <td style="color: rgb(196, 134, 21) !important;">
+                        {{p.balance || 0 | number:8}} {{coin.coin | uppercase}}
+                        <br>
+                        <small class="green">${{p.balance * coin.selling.usd || 0 | number:2}}</small>
+                    </td>
+                     </tr>
+          
+              
+                    <div ng-if="coin.customers.length < 1">
+                        <small><e>No affliates available for this coin yet.</e></small>
+                    </div>
+                      </tbody>
+                    </table>  
+
+                </div>
+                
+                        </div>
+
+                        <br>
+                    </div>
+                    </div>
+             
+                </div>
+
+      
+       
+       </div>
+
+    </div>
+    </div>
+  </div>
+  
+  
+
+
+
+  
+ <div ng-include src="'templates/admin/popups/view_customer.html'"></div>
