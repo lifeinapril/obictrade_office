@@ -1,4 +1,4 @@
-app.controller("admin", function($rootScope,Backup,$scope,Bitcoin,Config,Affliates,Admin,USDT,Ethereum,Transactions,Peers,Assets,Agents,Upload,$sessionStorage,$localStorage,Users,$timeout,toastr,$location) {
+app.controller("admin", function($rootScope,Backup,$scope,Coin,Config,Affliates,Admin,Transactions,Peers,Assets,Agents,Upload,$sessionStorage,$localStorage,Users,$timeout,toastr,$location) {
     $scope.media=Config.media;
     $scope.media_secure=Config.media;
     $scope.asset={
@@ -197,38 +197,6 @@ $rootScope.max_coin=function(){
   
 
 
-$rootScope.send_coin=function(amt,address){
-    $rootScope.show_loader=true;
-    var data={
-        address:address,
-        amount:amt
-      };  
-      var Cx=Bitcoin;
-    if($rootScope.coin.coin="BTC"){
-          Cx=Bitcoin;
-      }else
-      if($rootScope.coin.coin="ETH"){
-        Cx=Ethereum;
-      }else
-      if($rootScope.coin.coin="USDT"){
-        Cx=USDT;
-      }
-      if(Cx){
-        Cx.send(data).then(function(Data){
-            $rootScope.show_loader=false;
-            if(Data.data.status==true){
-            toastr.success(Data.data.message,"Success!");
-            $timeout(function () {
-               window.location.reload();
-            }, 2000);
-            }else{
-            toastr.error(Data.data.message,"Oops!");
-            }
-            });
-        }
-  }
-        
-  
   
   
   
@@ -271,17 +239,8 @@ $rootScope.send_coin=function(amt,address){
 
     $rootScope.update_coin=function(data){
         $rootScope.show_loader=true;
-        var Cx=null;
-        if(data.coin=="BTC"){
-            Cx=Bitcoin;
-        }else  if(data.coin=="ETH"){
-            Cx=Ethereum;
-        }else  if(data.coin=="USDT"){
-            Cx=USDT;
-        }
-        if(Cx){
             data.admin_id=$rootScope.admin.o_id;
-            Cx.update(data).then(function(Data){
+            Coin.update(data).then(function(Data){
                  $rootScope.show_loader=false;
                 if(Data.data.status==true){
                 toastr.success(Data.data.message,"Success!");
@@ -291,8 +250,7 @@ $rootScope.send_coin=function(amt,address){
                 }else{
                 toastr.error(Data.data.message,"Oops!");
                 }
-                });    
-        }
+                });  
     }
 
 
@@ -329,7 +287,7 @@ $rootScope.send_coin=function(amt,address){
 
     $rootScope.stop_buy=function(){
         $rootScope.show_loader=true;
-        $rootScope.bitcoin.allow_buy=false;
+        $rootScope.coin.allow_buy=false;
         $rootScope.update_coin($rootScope.coin);
     }
 
@@ -562,9 +520,11 @@ $rootScope.select_admin=function(admin){
         }
         };
     
-    $scope.select_transaction=function(transaction){
+
+
+    $rootScope.select_transaction=function(transaction){
         $rootScope.selected_transaction=transaction;
-        };
+    };
             
 
 $scope.update_asset=function(asset){
@@ -1301,9 +1261,76 @@ $rootScope.set_reward=function(data){
 
 
 
+    $rootScope.approve_order=function(transaction) {
+        $rootScope.show_loader=true;
+        transaction.admin_id=$rootScope.admin.o_id;
+        Orders.approve(transaction).success(function(Data){
+            $rootScope.show_loader=false;
+            if(Data.data.status==true){
+            toastr.success(Data.data.message,"Success!"); 
+            $timeout(function () {
+               window.location.reload();
+            }, 2000);
+            }else{
+            toastr.error(Data.data.message,"Oops!");
+            }
+          }).error(function () {
+            $rootScope.show_loader=false;
+            toastr.success("error in connection, check your internet connection","Oops!");
+          });
+      };
+      
+
+    
+
+      
+
+    $rootScope.destroy_order=function(transaction) {
+        $rootScope.show_loader=true;
+        transaction.admin_id=$rootScope.admin.o_id;
+        Orders.destroy(transaction).success(function(Data){
+            $rootScope.show_loader=false;
+            if(Data.data.status==true){
+            toastr.success(Data.data.message,"Success!"); 
+            $timeout(function () {
+               window.location.reload();
+            }, 2000);
+            }else{
+            toastr.error(Data.data.message,"Oops!");
+            }
+          }).error(function () {
+            $rootScope.show_loader=false;
+            toastr.success("error in connection, check your internet connection","Oops!");
+          });
+      };
+      
+
     
 
 
+      
+
+    $rootScope.confirm_order=function(transaction) {
+        $rootScope.show_loader=true;
+        transaction.admin_id=$rootScope.admin.o_id;
+        Orders.confirm(transaction).success(function(Data){
+            $rootScope.show_loader=false;
+            if(Data.data.status==true){
+            toastr.success(Data.data.message,"Success!"); 
+            $timeout(function () {
+               window.location.reload();
+            }, 2000);
+            }else{
+            toastr.error(Data.data.message,"Oops!");
+            }
+          }).error(function () {
+            $rootScope.show_loader=false;
+            toastr.success("error in connection, check your internet connection","Oops!");
+          });
+      };
+      
+
+    
 
 
          });

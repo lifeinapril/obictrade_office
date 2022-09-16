@@ -1,5 +1,5 @@
 
-app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,Users,Affliates,Ethereum,Bitcoin,Assets,USDT,Banks,$localStorage,$filter,$timeout,$window){
+app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,Users,Affliates,Coin,Assets,Banks,$localStorage,$filter,$timeout,$window){
  
     $rootScope.year="2021";
     $rootScope.token=Config.token;
@@ -96,17 +96,17 @@ app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,U
             $rootScope.coins=Data.data.data; 
             }
             });
-        Bitcoin.wallet().then(function(Data){
+        Coin.wallet("BTC").then(function(Data){
             if(Data.data.status==true){
             $rootScope.bitcoin=Data.data.data; 
             }
             });
-        Ethereum.wallet().then(function(Data){
+        Coin.wallet("ETH").then(function(Data){
             if(Data.data.status==true){
             $rootScope.ethereum=Data.data.data; 
             }
             });
-        USDT.wallet().then(function(Data){
+        Coin.wallet("USDT").then(function(Data){
             if(Data.data.status==true){
              $rootScope.usdt=Data.data.data; 
             }

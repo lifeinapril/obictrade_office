@@ -18,9 +18,8 @@
       <tbody style="border:none !important;">
         <tr>
           <th>Coin</th>
-          <th>Total balances</th>
-          <th>Rate</th>
-          <th>Value</th>
+          <!-- <th>Connected wallets</th> -->
+          <th>Name</th>
           <th></th>
         </tr>
   
@@ -28,11 +27,11 @@
           <td>
             <img title="link" ng-if="coin.icon" src="{{media + coin.icon +'?token='+token}}" height="30" />
           </td>
-          <td>{{total_coin_wallet(coin) | limitTo:8}} {{coin.coin}}</td>
-          <td><b>${{coin.buying.usd || 0 | number:2}}</b> / {{coin.coin}}</td>
-          <td class="green">${{(total_coin_wallet(coin) * coin.selling.usd) || 0 | number:2}}</td>
+          <!-- <td>{{coin.customers.length || 0}}</td> -->
+          <!-- <td><b>${{coin.buying.usd || 0 | number:2}}</b> / {{coin.coin}}</td> -->
+          <td>{{coin.coin}}</td>
           <td>   
-            <a data-toggle="modal" data-target="#traders"  ng-click="open_wallet(coin)" style="text-decoration: underline !important; color: rgb(185, 143, 27) !important;cursor: pointer;">view wallets</a>
+            <a data-toggle="modal" data-target="#traders"  ng-click="open_wallet(coin)" style="text-decoration: underline !important; color: rgb(185, 143, 27) !important;cursor: pointer;">view accounts</a>
           </td>
         </tr>
       </tbody>
@@ -64,7 +63,7 @@
 </canvas> 
 <br/><br/>
 
-<div class="col-lg-12 col-xs-12 col-sm-12">
+<!-- <div class="col-lg-12 col-xs-12 col-sm-12">
   <div class="small-box bg-black">
     <div class="inner"> 
       <p>Total Assets</p>
@@ -74,9 +73,7 @@
       <i class="fa fa-coins white"></i>
     </div>
    </div>
-</div>
-<br>
-<br>
+</div> -->
 <h4 style="color:#fff !important;">Obic rates</h4>
 <div class="box padding" ng-repeat="coin in coins" style="width: 100% !important; float: left !important;">
       <div class="text-right" style="float: right !important;">    

@@ -10,7 +10,7 @@
                 <section class="content-header">
                   <br>
                 <h2 class="black">
-                Trades
+                Reports
                 </h2>
                 </section>
       
@@ -25,14 +25,6 @@
                         <div class="input-group-sm col col-md-7 col-sm-7 col-xs-7">
                           <input type="text" ng-model="srch" style="background-color:rgba(255, 218, 185, 0) !important; color:rgb(0, 0, 0);" placeholder="Search for transactions">
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-3 pull-right">
-                          <select title="link" ng-model="dropfilter" ng-change="filter_status(dropfilter)">
-                            <option value="" selected>All</option>
-                            <option value="1" selected>Pending</option>
-                            <option value="2" selected>Successful</option>
-                            <option value="0" selected>Declined</option>
-                          </select>
-                        </div>
                     </div>
                     <bR>
 
@@ -43,14 +35,19 @@
                                   <th>Amount</th>
                                   <th>Status</th>
                                 </tr>
-                                  <tr ng-include src="'templates/admin/components/sales_list.html'" ng-repeat="p in transactions | filter:srch | filter:{status:dropfilter} | orderBy:'-date_created' | limitTo:125" style="cursor:pointer;" data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
-                                  </tr>
+                
+                              <tr ng-include src="'templates/admin/components/sales_list.html'" ng-repeat="p in transactions | filter:srch | filter:{status:0,reported:true,sorted:false} | orderBy:'-date_created' | limitTo:125" style="cursor:pointer;" data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+                                </tr>
+
+
+                    
+                    
                             </tbody>
                           </table>  
 
 
-                          <div class="text-center padding" ng-if="!transactions || transactions.length < 1">
-                           <br><br><br> <b>You Haven't Had Any Transaction Yet</b>
+                          <div class="text-center padding" ng-if="!transactions || (transactions | filter:{status:0,reported:true,sorted:false}).length < 1">
+                           <br><br><br> <b>No reports made</b>
                           </div>
                   
                       </div>
@@ -109,10 +106,10 @@
 
 <br>
   <h4 class="black">
-     Pending Trades
+     Sorted Issues
     </h4>
   <h6 class="black">{{
-    (transactions | filter:{status:1}).length || 0
+    (transactions | filter:{status:0,reported:true,sorted:true}).length || 0
   }} Pending</h6>
   <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
     <tbody style="border:none !important;">
@@ -121,7 +118,7 @@
     <th>Amount</th>
   </tr>
 
-  <tr  ng-repeat="p in transactions | filter:{status:1} | orderBy:'-date_created'" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+  <tr  ng-repeat="p in transactions | filter:{status:0,reported:true,sorted:false} | orderBy:'-date_created'" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
       <td>{{p.name}}</td>
       <td>
         <b ng-if="p.type=='cryptocurrency'">{{p.symbol || '$'}} {{p.amount || 0 | number:8}}</b>
@@ -135,56 +132,13 @@
 </table>
 
 
-<div ng-show="!transactions || (transactions | filter:{status:1}).length < 1" class="text-center padding"><br><br><br>
-<b>No Pending</b>
+<div ng-show="!transactions || (transactions | filter:{status:0,reported:true,sorted:true}).length < 1" class="text-center padding"><br><br><br>
+<b>No Issue</b>
 </div>
 
 
 
 
-</div>
-
-
-<br>
-  
-    
-  <div class="box padding" style="padding:10px !important;overflow:scroll !important;">
-
-
-    <h3 class="orange">
-      <i class="fa fa-tags orange"></i> Today's Trades
-      </h3>
-
-    <h6 class="black">{{
-      (transactions | filter:TodaySales).length || 0
-    }} sales today</h6>
-    <table class="table table-hover" style="overflow-y: scroll !important;height: 200px !important;">
-      <tbody style="border:none !important;">
-      <tr style="color:rgb(39, 38, 38);background-color: rgb(252, 248, 248);border: 1px solid rgb(247, 244, 244);">
-      <th>Type</th>
-      <th>Status</th>
-    </tr>
-
-    <tr  ng-repeat="p in transactions | filter:TodaySales | orderBy:'-date_created'" style="cursor:pointer;background-color:rgb(236, 233, 233) !important;color:rgb(29, 28, 28) !important;"  data-toggle="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
-        <td>{{p.name}} <b class="orange">{{p.type}}</b></td>
-         <td>
-           <b ng-if="p.status==1" class="pull-right">Pending...</b>
-           <b ng-if="p.status==2" class="green pull-right">Successful</b>
-           <b ng-if="p.status==0" class="red pull-right">Declined</b>
-       </td>
-      </tr>
-  </tbody>
-
-</table>
-  
-
-<div ng-show="!transactions || (transactions | filter:TodaySales).length < 1" class="text-center padding"><br><br><br>
-<b>No sales today</b>
-</div>
-
-
-
-  
 </div>
 
 

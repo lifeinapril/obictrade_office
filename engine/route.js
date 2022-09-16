@@ -37,6 +37,11 @@ app.config(function($routeProvider, $locationProvider,$httpProvider,Config) {
         controller:"admin"
     })
 
+    $routeProvider.when('/reports', {
+        templateUrl: 'templates/admin/reports.html',
+        controller:"admin"
+    })
+
 
     $routeProvider.when('/agents', {
         templateUrl: 'templates/admin/agents.html',

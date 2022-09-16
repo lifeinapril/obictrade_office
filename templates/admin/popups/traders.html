@@ -33,7 +33,7 @@
                            <!-- <th>ObicID</th> -->
                            <th>Name</th>
                            <th>Address</th>
-                           <th>Balance</th>
+                           <!-- <th>Balance</th> -->
                     </tr>
           
                     <tr ng-repeat="p in coin.customers  | filter: greaterThan('balance', 0) | filter:srch | orderBy:'-balance'" style="cursor:pointer;"  data-toggle="modal" data-dismiss="modal" data-target="#viewcustomer" ng-click="select_customer(p)">
@@ -46,11 +46,11 @@
                     <td>
                         {{p.address}}
                     </td>
-                      <td style="color: rgb(196, 134, 21) !important;">
+                      <!-- <td style="color: rgb(196, 134, 21) !important;">
                         {{p.balance || 0 | number:8}} {{coin.coin | uppercase}}
                         <br>
                         <small class="green">${{p.balance * coin.selling.usd || 0 | number:2}}</small>
-                    </td>
+                    </td> -->
                      </tr>
           
               

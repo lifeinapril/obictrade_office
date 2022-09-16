@@ -1,102 +1,95 @@
 
       
   
-  <div class="modal fade bd-example-modal-lg" id="viewtransaction" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade" id="viewtransaction" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog  modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
         </div>
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
-                    <div class="row" style="padding:14px !important;">
 
-                        <div class="media-body" ng-if="selected_transaction.customer.bank_account">
-                        <b style="color: black !important;">Trader</b>  
-                        <ul class="list-group">
-                            <li class="list-group-item"><v>Account Name</v> <b class="pull-right">{{selected_transaction.customer.full_name || (selected_transaction.customer.first_name +' '+ selected_transaction.customer.last_name) | capitalize}}</b></li>
-                            <li class="list-group-item"><v>ObicID</v> <b class="oran pull-right">{{selected_transaction.customer.o_id}}</b></li>
-                        </ul>
+                <div class="list-group">
+                        <div class="list-group-item" ng-if="selected_transaction.customer">
+                            <b style="color: black !important;">Customer</b>  
+                            <ul class="list-group">
+                                <li class="list-group-item"><v>Account Name</v> <b class="pull-right">{{selected_transaction.customer.full_name || (selected_transaction.customer.first_name +' '+ selected_transaction.customer.last_name) | capitalize}}</b></li>
+                                <li class="list-group-item"><v>ObicID</v> <b class="oran pull-right">{{selected_transaction.customer.o_id}}</b></li>
+                                <li class="list-group-item"><v>Address</v>
+                                     <b class="pull-right">{{selected_transaction.customer.to}}</b>
+                                     <qrcode data="{{selected_transaction.to || '...'}}" size="150"></qrcode>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="list-group-item" ng-if="selected_transaction.trader">
+                            <b style="color: black !important;">Trader</b>  
+                            <ul class="list-group">
+                                <li class="list-group-item"><v>Account Name</v> <b class="pull-right">{{selected_transaction.trader.full_name || (selected_transaction.trader.first_name +' '+ selected_transaction.trader.last_name) | capitalize}}</b></li>
+                                <li class="list-group-item"><v>ObicID</v> <b class="oran pull-right">{{selected_transaction.trader.o_id}}</b></li>
+                            </ul>
                         </div>
                 </div>
-                <br>
-                <b style="color: black !important;">Transaction</b>  
                 <div class="list-group">
-                <li class="list-group-item">
-                    <v>Asset</v> 
-                    <b class="pull-right" style="float: right !important;color: black !important;font-size: 20px !important;">
-                             {{selected_transaction.name}}
-                    </b> 
-                  </li>
 
-                    <div ng-if="selected_transaction.type=='cryptocurrency'">
-                        <li class="list-group-item">
-                            <v>Amount</v> 
-                            <small class="pull-right" style="float: right !important;"> &nbsp;(${{coin_usd(selected_transaction.amount,selected_transaction.symbol) || 0 | limitTo:4}})</small>
-                     
-                            <b class="pull-right" ng-class="!selected_transaction.credited ? 'green':'red'">
-                                <small ng-if="!selected_transaction.credited">(bought)</small>
-                                <small ng-if="selected_transaction.credited">(sold)</small>
-                                <v ng-if="!selected_transaction.credited">-</v>  
-                                <v ng-if="selected_transaction.credited">+</v>               
-                                 {{selected_transaction.amount || 0 | number:8}} {{selected_transaction.symbol || '$'}}
-                            </b> 
-                          </li>
-                    </div>
+                    <li class="list-group-item">
+                        <v>Asset</v> 
+                        <b class="pull-right" style="float: right !important;color: black !important;font-size: 20px !important;">
+                        {{selected_transaction.name}}
+                        </b> 
+                    </li>
+
+                    <li class="list-group-item" ng-if="selected_transaction.type=='cryptocurrency'">
+                        <v>Amount</v> 
+                        <div class="pull-right" style="float: right !important;">
+                            <b>{{selected_transaction.amount || 0 | number:8}} {{selected_transaction.symbol}}</b>
+                            <small>(${{coin_usd(selected_transaction.amount,selected_transaction.symbol) || 0 | limitTo:4}})</small>
+                        </div> 
+                    </li>
 
 
-                    <div ng-if="selected_transaction.cards.length > 0">
-                        <li class="list-group-item" ng-if="card.quantity > 0" ng-repeat="card in selected_transaction.cards">
-                            <v>Card Value (<b class="green">{{selected_transaction.symbol || '$'}} {{card.amount || 0}} </b>)</v>
-                            <div class="pull-right">
-                                <small>(x{{card.quantity || 1}}) </small>
-                                <b class="green" style="font-size:15px !important;">{{card.total || selected_transaction.rates * (card.amount * card.quantity) || 0 | currency:'₦':0}}</b>
-                            </div>
-                        </li>
-                    </div>
+                    <li class="list-group-item" ng-show="selected_transaction.cards.length > 0" ng-if="card.quantity > 0" ng-repeat="card in selected_transaction.cards">
+                        <v>Card Value (<b class="green">{{selected_transaction.symbol || '$'}} {{card.amount || 0}} </b>)</v>
+                        <div class="pull-right">
+                            <small>(x{{card.quantity || 1}}) </small>
+                            <b class="green" style="font-size:15px !important;">{{card.total || selected_transaction.rates * (card.amount * card.quantity) || 0 | currency:'₦':0}}</b>
+                        </div>
+                    </li>
 
 
 
-                        <li ng-if="selected_transaction.type=='gift card'" class="list-group-item">
-                            <v>Total Payout</v>
-                            <b class="green pull-right" style="font-size:20px !important;">{{selected_transaction.payout || total_card(selected_transaction.cards) || 0 | currency:'₦'}}</b>
-                        </li>
-                        <li ng-if="selected_transaction.type=='cryptocurrency'" class="list-group-item">
-                            <v>Value</v>
-                            <b class="pull-right" ng-class="!selected_transaction.credited ? 'red':'green'">
-                                <small ng-if="selected_transaction.credited">(Received)</small>
-                                <small ng-if="!selected_transaction.credited">(Debited)</small>
-                                <v ng-if="!selected_transaction.credited">-</v>  
-                                <v ng-if="selected_transaction.credited">+</v>  
-                                {{selected_transaction.payout || 0 | currency:'₦'}}
-                            </b>
-                        </li>
-                        <li ng-if="selected_transaction.hash" class="list-group-item">
-                            <v class="dark">Hash</v>
-                            <h6 class="orange">{{selected_transaction.hash}}</h6>
-                        </li>
+                    <li ng-if="selected_transaction.type=='gift card'" class="list-group-item">
+                        <v>Total Payout</v>
+                        <b class="green pull-right" style="font-size:20px !important;">{{selected_transaction.payout || total_card(selected_transaction.cards) || 0 | currency:'₦'}}</b>
+                    </li>
 
-                        <li ng-if="selected_transaction.fee" class="list-group-item">
-                            <v class="dark">Fee</v>
-                            <h6 class="pull-right" ng-class="!selected_transaction.credited ? 'green':'red'">${{coin_usd(selected_transaction.fee,selected_transaction.symbol)}}</h6>
-                        </li>
+                    <li ng-if="selected_transaction.type=='cryptocurrency'" class="list-group-item">
+                        <v>Value</v>
+                        <div class="pull-right"  style="float: right !important;">
+                            <b class="green">{{selected_transaction.payout || 0 | currency:'₦'}}</b>
+                        </div>
+                    </li>
 
-                    </div>
+                    <li ng-if="selected_transaction.hash" class="list-group-item">
+                        <v class="dark">Hash</v>
+                        <h6 class="orange">{{selected_transaction.hash}}</h6>
+                    </li>
+
+                    <li ng-if="selected_transaction.order_fee" class="list-group-item">
+                        <v class="dark">Order Fee</v>
+                        <h6 class="pull-right green">NGN {{selected_transaction.order_fee || 0 | currency:'₦'}}</h6>
+                    </li>
+
+                </div>
                     
-
-
-
-
-
-
                 </div>
 
                 <div class="col-md-6 col-sm-12">
                     <div class="media"> 
                          <b style="color: black !important;">Trade details</b>  
-                        <div class="media-body">
                           <ul class="list-group">
                                 <li class="list-group-item"><v>Transaction ID</v> <v class="pull-right">{{selected_transaction.transaction_id}}</v></li>
                                 <!-- <li class="list-group-item"><v>Asset Type</v> <b class="orange pull-right">{{selected_transaction.type | capitalize}}</b></li> -->
@@ -109,51 +102,49 @@
                                 </li>
                                 <li class="list-group-item"><v>Date</v> <small class="pull-right">{{selected_transaction.date_created | date:"MMMM d, y,  hh:mm a"}}</small></li>
                             </ul>
-                        </div>
-
-                        <br>
                     </div>
                 </div>
-                </div>
+
+
+            </div>
 
               
 
-        <div class="row"  style="padding:14px !important;" ng-if="selected_transaction.photo">
-            <small>{{selected_transaction.card_description || '...'}}</small>
-          
-<!-- 
-            <div style="padding: 10px !important;float: left !important;">
-                <a href="{{media + selected_transaction.photo}}"><img src="{{media + selected_transaction.photo}}" height="70"/></a>
-               </div>
-               <div ng-repeat="file in selected_transaction.gallery" style="padding: 10px !important;float: left !important;">
-                <a href="{{media + file}}"><img src="{{media + file}}" height="70"/></a>
-               </div> -->
-        </div>
-
-  <br>
-        <div class="col col-md-12" ng-if="selected_transaction.message">
-            <div class="form-group">
-              <label style="color:#333;">Message</label>
-              <textarea ng-if="selected_transaction.status==1" ng-model="selected_transaction.message" class="form-control" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Message For Customer">
-            </textarea>
-            <v ng-if="selected_transaction.status!=1">{{selected_transaction.message}}</v>
+            <div class="row"  style="padding:14px !important;" ng-if="selected_transaction.photo">
+                <small>{{selected_transaction.card_description || '...'}}</small>
             </div>
-        </div>
+
+
+            <div class="row" ng-if="selected_transaction.message">
+                <div class="form-group">
+                    <label style="color:#333;">Message</label>
+                    <textarea ng-if="selected_transaction.status==1" ng-model="selected_transaction.message" class="form-control" style="width:100%;background-color:rgba(255, 255, 255, 0) !important;color:#333 !important;" placeholder="Message For Customer">
+                    </textarea>
+                    <v ng-if="selected_transaction.status!=1">{{selected_transaction.message}}</v>
+                </div>
+            </div>
 
        </div>
-
-
         <div class="modal-footer text-center center">
 
             <div ng-if="selected_transaction.photos && !selected_transaction.downloaded && selected_transaction.status==1">
                 <button ng-hide="downloading" ng-click="download_asset(selected_transaction)" class="btn btn-blue">Download Assets</button>
                 <b ng-show="downloading">Downloading....</b>
-           </div>
+            </div>
            
-            <div ng-if="selected_transaction.photos && selected_transaction.downloaded && selected_transaction.status==1">
-            <a ng-click="decline_transaction(selected_transaction)" class="btn btn-danger">Decline</a>&nbsp;&nbsp;&nbsp;
-            <a ng-click="approve_transaction(selected_transaction)" class="btn btn-primary">Approve</a>
-        </div>
+            <div ng-if="selected_transaction.type=='gift card' && selected_transaction.status==1">
+                <a ng-click="decline_transaction(selected_transaction)" class="btn btn-danger">Decline</a>&nbsp;&nbsp;&nbsp;
+                <a ng-click="approve_transaction(selected_transaction)" class="btn btn-primary">Approve</a>
+            </div>
+
+
+            <div ng-show="selected_transaction.type=='cryptocurrency'" ng-if="(selected_transaction.status==0 && selected_transaction.reported) || (selected_transaction.status==1 && (!selected_transaction.trader.o_id || !selected_transaction.customer.o_id))">
+                <a ng-hide="selected_transaction.trader.o_id && selected_transaction.customer.o_id" ng-click="destroy_order(selected_transaction)" class="btn btn-primary">Reject</a>
+                <a ng-hide="selected_transaction.trader.o_id && selected_transaction.customer.o_id" ng-click="approve_order(selected_transaction)" class="btn btn-primary">Approve</a>
+                <a ng-if="!selected_transaction.trader.o_id || !selected_transaction.customer.o_id" ng-click="confirm_order(selected_transaction)" class="btn btn-primary">Confirm</a>
+            </div>
+    
+
         </div>
 
 

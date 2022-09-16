@@ -13,6 +13,20 @@ app.factory('Authorize',function($http,Config){
 });
 
 
+app.factory('Orders',function($http,Config){
+  return  { 
+   confirm: function(t){
+     return $http.post(Config.API+"orders/confirm",t);
+   },
+  approve: function(t){
+     return $http.post(Config.API+"orders/approve",t);
+   },
+   destroy: function(t){
+     return $http.post(Config.API+"orders/destroy",t);
+   }
+  }          
+  });
+
 
 app.factory('Admin',function($http,Config){
 return  { 
@@ -111,31 +125,13 @@ app.factory('Backup',function($http,Config){
   }
 });
 
-app.factory('Bitcoin',function($http,Config){
+app.factory('Coin',function($http,Config){
   return  { 
-    buy_rate: function(amount){
-    return $http.get(Config.API + "btc/buy_rate/"+amount);
-    },
-    sell_rate: function(amount){
-    return $http.get(Config.API + "btc/sell_rate/"+amount);
-    },
-    balance: function(){
-      return $http.get(Config.API+ "btc/balance");
-  },
-  send: function(data){
-    return $http.post(Config.API+ "btc/send",data);
-},
-get: function(){
-  return $http.get(Config.API+ "bitcoin");
-},
 wallet: function(){
-  return $http.get(Config.API+ "bitcoin/wallet");
-},
-balance: function(){
-  return $http.get(Config.API+ "btc/balance");
+  return $http.get(Config.API+ "coin/wallet");
 },
   update: function(data){
-    return $http.post(Config.API+ "bitcoin/update",data);
+    return $http.post(Config.API+ "coin/update",data);
 }
   }
 });
@@ -196,64 +192,6 @@ app.factory('Banks',function($http,Config){
   }
 }
   })
-
-
-app.factory('Ethereum',function($http,Config){
-  return  { 
-    buy_rate: function(amount){
-    return $http.get(Config.API + "eth/buy_rate/"+amount);
-    },
-    sell_rate: function(amount){
-    return $http.get(Config.API + "eth/sell_rate/"+amount);
-    },
-    balance: function(){
-      return $http.get(Config.API+ "eth/balance");
-  },
-  send: function(data){
-    return $http.post(Config.API+ "eth/send",data);
-},
-get: function(){
-  return $http.get(Config.API+ "ethereum");
-},
-wallet: function(){
-  return $http.get(Config.API+ "ethereum/wallet");
-},
-  update: function(data){
-    return $http.post(Config.API+ "ethereum/update",data);
-}
-  }
-});
-
-
-
-
-
-app.factory('USDT',function($http,Config){
-  return  { 
-    buy_rate: function(amount){
-    return $http.get(Config.API + "usdt/buy_rate/"+amount);
-    },
-    sell_rate: function(amount){
-    return $http.get(Config.API + "usdt/sell_rate/"+amount);
-    },
-    balance: function(){
-      return $http.get(Config.API+ "usdt/balance");
-  },
-  send: function(data){
-    return $http.post(Config.API+ "usdt/send",data);
-},
-get: function(){
-  return $http.get(Config.API+ "usdt");
-},
-wallet: function(){
-  return $http.get(Config.API+ "usdt/wallet");
-},
-  update: function(data){
-    return $http.post(Config.API+ "usdt/update",data);
-}
-  }
-});
-
 
 
 

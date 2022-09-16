@@ -39,6 +39,17 @@
     </ul>     
 
     
+                 
+    <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.transactions" style="padding-top:5px;margin-top:5px;margin-right:20px;">
+        <li class='dropdown'>
+            <a  style="margin-top: 0px;" href='/office/reports' style="color:rgb(20, 20, 20) !important;">
+                <i class="fa fa-exclamation-triangle orange" aria-hidden="true"></i>&nbsp;<b style="color:rgb(255, 255, 255) !important;font-size: 18px !important;">Reports</b>
+                <span ng-if="(transactions | filter:{status:0,reported:true,sorted:false}).length > 0" style="float: right !important;background-color: orange !important;" class="badge badge-danger">{{(transactions | filter:{status:0,reported:true,sorted:false}).length || 0}}</span>
+           </a>
+        </li>
+    </ul>     
+
+    
       
       <ul class='nav navbar-nav navbar-right' ng-if="admin.administrator.access.customers" style="padding-top:5px;margin-top:5px;margin-right:20px;">
         <li class='dropdown'>
