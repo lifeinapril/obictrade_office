@@ -8,17 +8,21 @@
 
 
 
-        <div class="text-center" data-toggle="modal" data-target="#viewadmin" ng-click="select_admin(admin)">
-          <div class="profile-photo-small" ng-style="{'background-image':'url('+media+admin.photo +'?token='+token+')'}"></div>  
-                               
-          <h5>Hello, {{admin.full_name || 'Obic' |capitalize}}</h5>
-          <b class="oran" ng-if="admin.administrator.role==0">Owner</b>
-          <b class="oran" ng-if="admin.administrator.role==1">Manager</b>
-          <b class="oran" ng-if="admin.administrator.role==2">Sales</b>
-          <b class="oran" ng-if="admin.administrator.role==3">Accounting</b>
-          <b class="oran" ng-if="admin.administrator.role==4">Support</b>
-          <hr>
+       
+
+
+        <div class="text-center" ng-style="{'background-image':'url('+media+admin.photo +'?token='+token+')'}">
+              <div class="profile_header">
+                <div class="profile-photo-small" ng-style="{'background-image':'url('+media+admin.photo +'?token='+token+')'}"></div>                     
+                <h5>Hello, {{admin.full_name || 'Obic' |capitalize}}</h5>
+                <div class="badge" ng-if="admin.administrator.role==0">Owner</div>
+                <div class="badge" ng-if="admin.administrator.role==1">Manager</div>
+                <div class="badge" ng-if="admin.administrator.role==2">Sales</div>
+                <div class="badge" ng-if="admin.administrator.role==3">Accounting</div>
+                <div class="badge" ng-if="admin.administrator.role==4">Support</div>
+              </div>
         </div>
+
 
       <ul class="sidebar-menu tree" data-widget="tree" style="margin-top:0px !important;padding-top: 0px !important;">
 

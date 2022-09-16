@@ -43,6 +43,15 @@ color: rgb(255, 255, 255) !important;
   }
  
 
+
+  .profile_header{
+    background-color: rgba(0, 0, 0, 0.52) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(20px) !important;
+    width: 100%;
+    height: auto;
+    padding: 20px !important;
+  }
   
 .drop-box{
   background-color: #092b38 !important;
