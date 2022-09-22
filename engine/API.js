@@ -22,7 +22,7 @@ app.factory('Orders',function($http,Config){
      return $http.post(Config.API+"orders/approve",t);
    },
    destroy: function(t){
-     return $http.post(Config.API+"orders/destroy",t);
+     return $http.post(Config.API+"orders/cancel",t);
    }
   }          
   });
