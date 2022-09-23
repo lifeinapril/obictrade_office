@@ -141,13 +141,13 @@
 
 
                                     <div class="tab-pane" style="overflow-y: scroll !important;height: 700px !important;background-color:rgba(199, 41, 41, 0.014) !important" id="wallets">
-                                      <ul class="list-group">
+                                      <!-- <ul class="list-group">
                                         <li class="list-group-item"><v class="black">Assets value</v> <v class="green pull-right">${{
                                           ((selected_customer.bitcoin_wallet.balance * bitcoin.selling.usd)+
                                           (selected_customer.ethereum_wallet.balance * ethereum.selling.usd)+
                                           (selected_customer.usdt_wallet.balance * usdt.selling.usd)) || 0 
                                         | number:2 }}</v></li>
-                                       </ul> 
+                                       </ul>  -->
                                       <div ng-include src="'templates/admin/components/customer_wallets.html'">
                                         </div>
                                     </div>

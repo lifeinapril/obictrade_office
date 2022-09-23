@@ -127,9 +127,6 @@ app.factory('Backup',function($http,Config){
 
 app.factory('Coin',function($http,Config){
   return  { 
-wallet: function(){
-  return $http.get(Config.API+ "coin/wallet");
-},
   update: function(data){
     return $http.post(Config.API+ "coin/update",data);
 }

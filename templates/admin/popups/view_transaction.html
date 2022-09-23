@@ -20,8 +20,7 @@
                                 <li class="list-group-item"><v>Account Name</v> <b class="pull-right">{{selected_transaction.customer.full_name || (selected_transaction.customer.first_name +' '+ selected_transaction.customer.last_name) | capitalize}}</b></li>
                                 <li class="list-group-item"><v>ObicID</v> <b class="oran pull-right">{{selected_transaction.customer.o_id}}</b></li>
                                 <li class="list-group-item"><v>Address</v>
-                                     <b class="pull-right">{{selected_transaction.to}}</b>
-                                     <qrcode data="{{selected_transaction.to || '...'}}" size="150"></qrcode>
+                                     <b class="pull-right">{{selected_transaction.to || '...'}}</b>
                                 </li>
                             </ul>
                         </div>
@@ -46,7 +45,7 @@
                         <v>Amount</v> 
                         <div class="pull-right" style="float: right !important;">
                             <b>{{selected_transaction.amount || 0 | number:8}} {{selected_transaction.symbol}}</b>
-                            <small>(${{coin_usd(selected_transaction.amount,selected_transaction.symbol) || 0 | limitTo:4}})</small>
+                            <small>(${{selected_transaction.payout/selected_transaction.rates || 0 | limitTo:4}})</small>
                         </div> 
                     </li>
 

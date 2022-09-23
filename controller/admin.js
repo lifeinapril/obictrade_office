@@ -294,32 +294,7 @@ $rootScope.max_coin=function(){
 
 
 
-    $rootScope.total_wallet_value=function(customer){
-        var total,ngn,btc,eth,usdt=0;
-        if(customer){
-            if(customer.naira_wallet){
-            var ngn=customer.naira_wallet.balance;
-            }
-            if(customer.bitcoin_wallet){
-            if(customer.bitcoin_wallet.balance){
-         btc=(customer.bitcoin_wallet.balance * ($rootScope.bitcoin.selling.usd || 0)) * $rootScope.bitcoin.sell_rates;
-            }
-        }
-        if(customer.ethereum_wallet){
-            if(customer.ethereum_wallet.balance){
-         eth=(customer.ethereum_wallet.balance * ($rootScope.ethereum.selling.usd || 0)) * $rootScope.ethereum.sell_rates;
-            }
-        } 
-        if(customer.usdt_wallet){
-            if(customer.usdt_wallet.balance){
-         usdt=(customer.usdt_wallet.balance * ($rootScope.usdt.selling.usd || 0)) * $rootScope.usdt.sell_rates;
-            }
-        }
-        total=ngn + btc + eth + usdt;
-    }
-        return total;
-    }
-
+ 
 
     $rootScope.combined_transactions=function(user){
         var total=0;
@@ -677,26 +652,6 @@ $rootScope.CryptoSales=function(sale){
 }
 
 
-
-$rootScope.coin_usd=function(amount,symbol){
-    var value=0;
-    if(symbol=="BTC"){
-        if($rootScope.bitcoin){
-            value=amount * $rootScope.bitcoin.selling.usd;
-        }
-    }else
-    if(symbol=="ETH"){
-        if($rootScope.ethereum){
-        value=amount * $rootScope.ethereum.selling.usd;
-        }
-    }else
-    if(symbol=="USDT"){
-        if($rootScope.usdt){
-        value=amount * $rootScope.usdt.selling.usd;
-        }
-    }
-     return value;
-}
 
 
 

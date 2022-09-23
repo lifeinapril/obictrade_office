@@ -31,39 +31,7 @@ app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,U
         });
     }
     
-    $rootScope.total_coin_wallet=function(coin){
-        var total=0;
-        if(coin){
-        if($rootScope.customers){
-        for(var i=0;i < $rootScope.customers.length;i++){
-            var customer=$rootScope.customers[i];
-            if(coin.coin=="BTC"){
-                if(customer.bitcoin_wallet){
-                    var bitcoin_wallet=customer.bitcoin_wallet;
-                    total=parseFloat(total)+parseFloat(bitcoin_wallet.balance);
-                }
-            }
-            if(coin.coin=="ETH"){
-                if(customer.ethereum_wallet){
-                    var ethereum_wallet=customer.ethereum_wallet;
-                    total=parseFloat(total)+parseFloat(ethereum_wallet.balance);
-                }
-            } 
-            if(coin.coin=="USDT"){
-                if(customer.usdt_wallet){
-                    var usdt_wallet=customer.usdt_wallet;
-                    total=parseFloat(total)+parseFloat(usdt_wallet.balance);
-                }
-            }
-        }
-    }
-}
-        return total;
-    }
-
-
-
-
+   
 
     $rootScope.greaterThan = function(prop, val){
         return function(item){
@@ -94,21 +62,6 @@ app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,U
         Admin.coins().then(function(Data){
             if(Data.data.status==true){
             $rootScope.coins=Data.data.data; 
-            }
-            });
-        Coin.wallet("BTC").then(function(Data){
-            if(Data.data.status==true){
-            $rootScope.bitcoin=Data.data.data; 
-            }
-            });
-        Coin.wallet("ETH").then(function(Data){
-            if(Data.data.status==true){
-            $rootScope.ethereum=Data.data.data; 
-            }
-            });
-        Coin.wallet("USDT").then(function(Data){
-            if(Data.data.status==true){
-             $rootScope.usdt=Data.data.data; 
             }
             });
       }
@@ -250,16 +203,18 @@ app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,U
         Transactions.all().then(function(Data){
             if(Data.data.status==true){
                 $rootScope.transactions=Data.data.data;
+                var chart_data=[];
+                var labels=[];
+                for(var i=0;i < $rootScope.coins.length;i++){
+                    var coin=$rootScope.coins[i];
+                    chart_data.push(($filter('filter')($rootScope.transactions,{symbol:coin.symbol})).length);
+                    labels.push(coin.symbol);
+                }
                 $rootScope.chart2 ={
-                    labels :["BTC", "ETH", "USDT"],
-                    data: [
-                        ($filter('filter')($rootScope.transactions,{name:'bitcoin'})).length,
-                        ($filter('filter')($rootScope.transactions,{name:'ethereum'})).length,
-                        ($filter('filter')($rootScope.transactions,{name:'usdt'})).length
-                        ],
+                    labels :labels,
+                    data:chart_data,
                     colors:['#FFA500','#808080','#006400']
                 }
-            
                 $rootScope.transactions.map(function (transaction) {
                     var date = transaction.date_created.split('-');
                     transaction.day = date[0];
