@@ -199,7 +199,6 @@ $rootScope.max_coin=function(){
 
   
   
-  
         
 
 
