@@ -43,7 +43,9 @@ app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,U
 
     $rootScope.customerFilter= function(id) {
             return function(t) {
-                return t.o_id === id || t.pool_id === id;
+                if(t.o_id == id || t.pool_id == id){
+                    return t;
+                }
             }
         }
 
