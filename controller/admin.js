@@ -199,6 +199,16 @@ $rootScope.max_coin=function(){
 
   
   
+
+
+  $rootScope.customerFilter=function(id){
+    return function(t) {
+        if(t.o_id == id || t.pool_id == id){
+            return t;
+        }
+    }
+}
+
         
 
 

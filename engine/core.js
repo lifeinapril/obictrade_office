@@ -40,16 +40,6 @@ app.run(function($rootScope,Admin,Config,Transactions,Logs,Peers,Backup,Agents,U
     }
 
 
-
-    $rootScope.customerFilter= function(id) {
-            return function(t) {
-                if(t.o_id == id || t.pool_id == id){
-                    return t;
-                }
-            }
-        }
-
-
     $rootScope.get_products=function(){
         Banks.all().then(function(Data){
             if(Data.data.status==true){

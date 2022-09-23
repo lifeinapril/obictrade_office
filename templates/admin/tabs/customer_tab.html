@@ -87,7 +87,7 @@
                                                               <th>Amount</th>
                                                                <th>Status</th>
                                                             </tr>
-                                                            <tr style="color:rgb(0, 0, 0) !important;" ng-include src="'templates/admin/components/sales_list.html'" ng-repeat="p in transactions | filter:customerFilter(p.o_id) | filter:{status:dropfilter} | orderBy:'-date_created' | filter:srch | limitTo:55"  style="cursor:pointer;" data-toggle="modal" data-dismiss="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
+                                                            <tr style="color:rgb(0, 0, 0) !important;" ng-include src="'templates/admin/components/sales_list.html'" ng-repeat="p in transactions | filter:customerFilter(selected_customer.o_id) | filter:{status:dropfilter} | orderBy:'-date_created' | filter:srch | limitTo:55"  style="cursor:pointer;" data-toggle="modal" data-dismiss="modal" data-target="#viewtransaction" ng-click="select_transaction(p)">
                                                             </tr>
                                                         </tbody>
                                                  </table>
