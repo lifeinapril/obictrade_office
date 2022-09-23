@@ -155,7 +155,7 @@
                                    
                                       <div class="box">
                                         <br>
-                                        <div class="padding list-group">
+                                        <div ng-if="admin.administrator.access.transactions" class="padding list-group">
                                           <h5 style="color: black !important;">If you suspend this account, customer won't be able to login and plcae trades.</h5>
                                           <button  ng-if="!selected_customer.suspended" class="btn btn-sm" style="background-color: orange !important;color: white !important;" ng-click="suspend_account(selected_customer)">
                                             Suspend Account

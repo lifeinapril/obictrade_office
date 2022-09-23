@@ -20,7 +20,7 @@
                                 <li class="list-group-item"><v>Account Name</v> <b class="pull-right">{{selected_transaction.customer.full_name || (selected_transaction.customer.first_name +' '+ selected_transaction.customer.last_name) | capitalize}}</b></li>
                                 <li class="list-group-item"><v>ObicID</v> <b class="oran pull-right">{{selected_transaction.customer.o_id}}</b></li>
                                 <li class="list-group-item"><v>Address</v>
-                                     <b class="pull-right">{{selected_transaction.customer.to}}</b>
+                                     <b class="pull-right">{{selected_transaction.to}}</b>
                                      <qrcode data="{{selected_transaction.to || '...'}}" size="150"></qrcode>
                                 </li>
                             </ul>
@@ -125,26 +125,22 @@
             </div>
 
        </div>
-        <div class="modal-footer text-center center">
 
-            <div ng-if="selected_transaction.photos && !selected_transaction.downloaded && selected_transaction.status==1">
-                <button ng-hide="downloading" ng-click="download_asset(selected_transaction)" class="btn btn-blue">Download Assets</button>
-                <b ng-show="downloading">Downloading....</b>
-            </div>
-           
+        <div class="modal-footer text-center center">
             <div ng-if="selected_transaction.type=='gift card' && selected_transaction.status==1">
+                <div ng-if="selected_transaction.photos && !selected_transaction.downloaded && selected_transaction.status==1">
+                    <button ng-hide="downloading" ng-click="download_asset(selected_transaction)" class="btn btn-blue">Download Assets</button>
+                    <b ng-show="downloading">Downloading....</b>
+                </div>           
                 <a ng-click="decline_transaction(selected_transaction)" class="btn btn-danger">Decline</a>&nbsp;&nbsp;&nbsp;
                 <a ng-click="approve_transaction(selected_transaction)" class="btn btn-primary">Approve</a>
             </div>
 
-
             <div ng-show="selected_transaction.type=='cryptocurrency'" ng-if="(selected_transaction.status==0 && selected_transaction.reported) || (selected_transaction.status==1 && (!selected_transaction.trader.o_id || !selected_transaction.customer.o_id))">
-                <a ng-click="destroy_order(selected_transaction)" class="btn btn-primary">Reject</a>
-                <a ng-click="approve_order(selected_transaction)" class="btn btn-primary">Approve</a>
-                <a ng-click="confirm_order(selected_transaction)" class="btn btn-primary">Confirm</a>
+                <a ng-click="destroy_order(selected_transaction)" class="btn btn-primary" style="background-color: red !important;">Cancel ORder</a>
+                <a ng-if="selected_transaction.confirmed" ng-click="approve_order(selected_transaction)" class="btn btn-primary"  style="background-color: rgb(4, 159, 40) !important;">Approve</a>
+                <a ng-if="!selected_transaction.trader.o_id && !selected_transaction.confirmed" ng-click="confirm_order(selected_transaction)" class="btn btn-primary">Confirm</a>
             </div>
-    
-
         </div>
 
 
