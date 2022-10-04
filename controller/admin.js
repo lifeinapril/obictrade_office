@@ -1,4 +1,4 @@
-app.controller("admin", function($rootScope,Backup,$scope,Coin,Config,Affliates,Admin,Transactions,Peers,Assets,Agents,Upload,$sessionStorage,$localStorage,Users,$timeout,toastr,$location) {
+app.controller("admin", function($rootScope,Backup,$scope,Coin,Config,Affliates,Admin,Transactions,Peers,Assets,Agents,Upload,Orders,$localStorage,Users,$timeout,toastr) {
     $scope.media=Config.media;
     $scope.media_secure=Config.media;
     $scope.asset={
