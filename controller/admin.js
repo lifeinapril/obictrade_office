@@ -1252,7 +1252,7 @@ $rootScope.set_reward=function(data){
     $rootScope.destroy_order=function(transaction) {
         $rootScope.show_loader=true;
         transaction.admin_id=$rootScope.admin.o_id;
-        Orders.destroy(transaction).success(function(Data){
+        Orders.cancel(transaction).success(function(Data){
             $rootScope.show_loader=false;
             if(Data.data.status==true){
             toastr.success(Data.data.message,"Success!"); 

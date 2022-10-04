@@ -21,7 +21,7 @@ app.factory('Orders',function($http,Config){
   approve: function(t){
      return $http.post(Config.API+"orders/approve",t);
    },
-   destroy: function(t){
+   cancel: function(t){
      return $http.post(Config.API+"orders/cancel",t);
    }
   }          
