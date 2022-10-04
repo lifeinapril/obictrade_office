@@ -1228,7 +1228,7 @@ $rootScope.set_reward=function(data){
     $rootScope.approve_order=function(transaction) {
         $rootScope.show_loader=true;
         transaction.admin_id=$rootScope.admin.o_id;
-        Orders.approve(transaction).success(function(Data){
+        Orders.approve(transaction).then(function(Data){
             $rootScope.show_loader=false;
             if(Data.data.status==true){
             toastr.success(Data.data.message,"Success!"); 
@@ -1252,7 +1252,7 @@ $rootScope.set_reward=function(data){
     $rootScope.destroy_order=function(transaction) {
         $rootScope.show_loader=true;
         transaction.admin_id=$rootScope.admin.o_id;
-        Orders.cancel(transaction).success(function(Data){
+        Orders.cancel(transaction).then(function(Data){
             $rootScope.show_loader=false;
             if(Data.data.status==true){
             toastr.success(Data.data.message,"Success!"); 
@@ -1277,7 +1277,7 @@ $rootScope.set_reward=function(data){
     $rootScope.confirm_order=function(transaction) {
         $rootScope.show_loader=true;
         transaction.admin_id=$rootScope.admin.o_id;
-        Orders.confirm(transaction).success(function(Data){
+        Orders.confirm(transaction).then(function(Data){
             $rootScope.show_loader=false;
             if(Data.data.status==true){
             toastr.success(Data.data.message,"Success!"); 
