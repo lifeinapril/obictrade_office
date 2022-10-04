@@ -136,7 +136,7 @@
             </div>
 
             <div ng-show="selected_transaction.type=='cryptocurrency'" ng-if="(selected_transaction.status==0 && selected_transaction.reported) || (selected_transaction.status==1 && (!selected_transaction.trader.o_id || !selected_transaction.customer.o_id))">
-                <a ng-click="destroy_order(selected_transaction)" class="btn btn-primary" style="background-color: red !important;">Cancel ORder</a>
+                <a ng-click="destroy_order(selected_transaction)" class="btn btn-primary" style="background-color: red !important;">Cancel Order</a>
                 <a ng-if="selected_transaction.confirmed" ng-click="approve_order(selected_transaction)" class="btn btn-primary"  style="background-color: rgb(4, 159, 40) !important;">Approve</a>
                 <a ng-if="!selected_transaction.trader.o_id && !selected_transaction.confirmed" ng-click="confirm_order(selected_transaction)" class="btn btn-primary">Confirm</a>
             </div>
