@@ -1,5 +1,5 @@
 FROM node:14
-WORKDIR /usr/src/admin
+WORKDIR /obictrade_office
 COPY ./package.json .
 RUN npm install
 COPY . .
